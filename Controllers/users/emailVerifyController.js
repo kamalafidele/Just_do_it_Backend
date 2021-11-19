@@ -29,8 +29,7 @@ const handleEmailVerification=  (req, res, next) =>{
    
                             const token=createToken(user._id);
                             return  res.status(200).json({token, user:{
-                                     firstname:user.firstname,
-                                     lastname:user.lastname,
+                                     username:user.username,
                                      email:user.email,
                                      profile:user.avatar
                               }});

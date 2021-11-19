@@ -3,7 +3,7 @@ const User=require("../models/UserSchema");
 
 const checker= async (req, res, next) =>{
     let token=req.headers.bearer;
-    //console.log(token);
+
     if(token){
         jwt.verify(token,process.env.JWT_SECRET, async(err,decoded) =>{
             if(err){
