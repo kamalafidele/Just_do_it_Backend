@@ -23,5 +23,11 @@ const Joi=require("joi");
         password:Joi.string().required().messages({"string.empty":"Password field is required "})
     });
 
+    const workspaceValidator=Joi.object().keys({
+        name:Joi.string().required().messages({"string.empty":"Provide the name for workspace"}),
+        description:Joi.string().required().messages({"string.empty":"Provide the description for workspace"}),
+        picture:Joi.string().required().messages({"string.empty":"Provide the picture for workspace"})
+    })
 
-   module.exports={emailValidator,resetValidator,signupValidator,loginValidator};
+
+   module.exports={emailValidator,resetValidator,signupValidator,loginValidator,workspaceValidator};

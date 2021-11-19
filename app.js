@@ -4,7 +4,8 @@ const cors=require("cors");
 const dotenv=require("dotenv");
 const mongoose=require("mongoose");
 const userRoutes=require("./Routes/userRoutes");
-
+const workspaceRoutes=require("./Routes/workspaceRoute");
+const tokenChecker=require("./Middlewares/tokenAuth");
 
 //Database connection
 const URL="mongodb+srv://fidele:123@cluster0.n9af1.mongodb.net/justdoitrw?retryWrites=true&w=majority";
@@ -27,13 +28,14 @@ var corsOptions = {
   }
 
 dotenv.config();
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.urlencoded({extended:true,limit:300000}));
 app.use(express.json());
 app.use(logger);
 
 //Routes
 app.use("/api/justdoit/users",userRoutes);
+app.use("/api/justdoit/workspaces",tokenChecker,workspaceRoutes);
 
 //NOT FOUND ERROR
 app.use(function(req,res){ 
