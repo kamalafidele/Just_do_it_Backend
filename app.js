@@ -6,6 +6,7 @@ const mongoose=require("mongoose");
 const userRoutes=require("./Routes/userRoutes");
 const workspaceRoutes=require("./Routes/workspaceRoute");
 const tokenChecker=require("./Middlewares/tokenAuth");
+const questionsRoute=require("./Routes/questionsRoute");
 
 //Database connection
 const URL="mongodb+srv://fidele:123@cluster0.n9af1.mongodb.net/justdoitrw?retryWrites=true&w=majority";
@@ -29,14 +30,14 @@ var corsOptions = {
 
 dotenv.config();
 app.use(cors());
-app.use(express.urlencoded({extended:true,limit:300000}));
-app.use(express.json());
+app.use(express.json({limit:'5mb'}));
+app.use(express.urlencoded({limit:'2mb',extended:true}));
 app.use(logger);
 
 //Routes
 app.use("/api/justdoit/users",userRoutes);
 app.use("/api/justdoit/workspaces",tokenChecker,workspaceRoutes);
-
+app.use("/api/justdoit/questions",tokenChecker,questionsRoute);
 //NOT FOUND ERROR
 app.use(function(req,res){ 
     return  res.status(404).json({error:"Sorry, the page you are looking for was not found "});
