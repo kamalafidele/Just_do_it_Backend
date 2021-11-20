@@ -15,6 +15,7 @@ const QuestionSchema=new Schema({
         type:Number,
         default:0
     },
+    answertoshow:{type:Schema.Types.ObjectId,ref:"answers",default:null},
     images:[{type:String}]
 });
 

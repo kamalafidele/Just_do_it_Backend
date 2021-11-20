@@ -11,7 +11,8 @@ const UserWorkspaceSchema=new Schema({
         {
             type:Schema.Types.ObjectId,
             ref:"workspaces"
-        }]
+        }
+    ]
 });
 
 module.exports=mongoose.model("userWorkspaces",UserWorkspaceSchema);
