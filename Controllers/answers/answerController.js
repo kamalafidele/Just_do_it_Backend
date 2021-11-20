@@ -71,5 +71,26 @@ const getQuestionAnswers=async (req,res) =>{
     return res.status(200).json({topicAnswers});
 }
 
+const upVote = async (req,res) =>{
+    let answerId=req.body.answerId;
+    let answerToUpvote=await AnswerSchema.findOne({_id:answerId});
+    let newVote=answerToUpvote.upVotes+1;
 
-module.exports={addAnswer,getQuestionAnswers};
+    AnswerSchema.findOneAndUpdate({_id:answerId},{upVotes:newVote})
+    .then(() =>{
+      return res.status(200).json({message:"Voted successfully"});
+    }).catch(err => {return res.status(500).json({error:"Internal error occured! Try again"})});
+}
+
+const downVote = async (req,res) =>{
+  let answerId=req.body.answerId;
+  let answerTodownvote=await AnswerSchema.findOne({_id:answerId});
+  let newVote=answerTodownvote.downVotes+1;
+
+  AnswerSchema.findOneAndUpdate({_id:answerId},{downVotes:newVote})
+  .then(() =>{
+    return res.status(200).json({message:"Down voted successfully"});
+  }).catch(err => {return res.status(500).json({error:"Internal error occured! Try again"})});
+}
+
+module.exports={addAnswer,getQuestionAnswers,upVote,downVote};
