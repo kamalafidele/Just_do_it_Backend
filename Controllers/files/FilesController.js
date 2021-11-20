@@ -12,39 +12,37 @@ cloudinary.config({
 
 router.post("/upload-profile", async (req,res)=>{ 
     let user=req.user;
+    console.log(req.body);
+    // if(!req.body.itemPhoto){
+    //     return res.status(400).json({error:"Please choose an image"});
+    // }
 
-    if(!req.body.itemPhoto){
-        return res.status(400).json({error:"Please choose an image"});
-    }
 
-    // let prevAvatar=user.avatar.split("/")[9] != "Person1_t6fjtq.png" ? user.avatar.split("/")[9] : "";
-    // prevAvatar=prevAvatar.split(".")[0];
-
-    const image = await cloudinary.v2.uploader.upload(req.body.itemPhoto,{
-        folder: 'users/images',
-        allowed_formats:['png','jpg','webp','svg','jfif']
+    // const image = await cloudinary.v2.uploader.upload(req.body.itemPhoto,{
+    //     folder: 'users/images',
+    //     allowed_formats:['png','jpg','webp','svg','jfif']
         
-    });
+    // });
 
-    User.findByIdAndUpdate({_id:req.user._id},{avatar:image.url})
-       .then( async (result) =>{
+    // User.findByIdAndUpdate({_id:req.user._id},{avatar:image.url})
+    //    .then( async (result) =>{
 
-      // let deleteImg=await cloudinary.v2.uploader.destroy(prevAvatar);
+    
 
-        let notification=new NotificationSchema({user:user._id,isFinished:false,
-          notificationMessage:` You  have changed your profile picture successfully.`});
+    //     let notification=new NotificationSchema({user:user._id,isFinished:false,
+    //       notificationMessage:` You  have changed your profile picture successfully.`});
 
-       notification.save()
-       .then(() =>{
-        return  res.status(200).json({message:"Image uploaded successfully",newProfile:image.url});
-       });   
+    //    notification.save()
+    //    .then(() =>{
+    //     return  res.status(200).json({message:"Image uploaded successfully",newProfile:image.url});
+    //    });   
 
-       })
-       .catch(err =>{
+    //    })
+    //    .catch(err =>{
 
-           console.log(err);
-           return res.status(400).json({error:"Error occurred. Try again !"});
-       })
+    //        console.log(err);
+    //        return res.status(400).json({error:"Error occurred. Try again !"});
+    //    })
 
 });
 
