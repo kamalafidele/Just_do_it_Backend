@@ -1,0 +1,75 @@
+const AnswerSchema=require("../../Models/AnswerSchema");
+const cloudinary=require("cloudinary");
+const QuestionSchema=require("../../Models/QuestionSchema");
+
+cloudinary.config({ 
+    cloud_name: 'justdoit', 
+    api_key: '959232878426886', 
+    api_secret: 'HdJRQW9QHzNrM7R9LX5dFELCBig' 
+  });
+
+async function upload(imagesNum,imagedata){
+    let imagesUrl=[];
+    let img;
+    for(let i=0; i<imagesNum; i++){
+        img = await cloudinary.v2.uploader.upload(imagedata[i],{folder: 'answerImages/images',
+            allowed_formats:['png','jpg','webp','svg','jfif']});
+            imagesUrl.push(img.url);
+     }
+ 
+     return imagesUrl;
+}
+
+const addAnswer= async (req,res) =>{
+    let {answer,question,images}=req.body;
+    let user=req.user;
+
+    let imagesNumber=images.length;
+     
+    if(imagesNumber == 0){
+      const createdAnswer=new AnswerSchema({answer:answer,question:question,answeredBy:user._id})
+      
+      createdAnswer.save()
+      .then(() => { 
+    
+         QuestionSchema.findOneAndUpdate({_id:question},{answertoshow:createdAnswer._id})
+         .then(() =>{
+            return res.status(200).json({message:"Answer added successfully."})
+         })
+        })
+      .catch(err => {return res.status(500).json({message:"Internal error occured! Try again "})});
+    }
+    else if(imagesNumber >0){
+         urls= await upload(imagesNumber,images);
+
+         const createdAnswer=new AnswerSchema({answer:answer,question:question,answeredBy:user._id,
+            images: imagesNumber == 2 ? [ urls[0],urls[1] ]:[ urls[0] ] });
+          
+            createdAnswer.save()
+            .then(() => { 
+              QuestionSchema.findOneAndUpdate({_id:question},{answertoshow:createdAnswer._id})
+              .then(() =>{
+                return res.status(200).json({message:"Answer added successfully."})})
+              })
+            .catch(err => {return res.status(500).json({message:"Internal error occured! Try again "})});
+    }
+}
+
+// const getAllAnswers= async (req,res) =>{
+
+//   let answers= await AnswerSchema.find().populate([{path:"question",select:"name"},
+//   {path:"answeredBy",select:"username avatar"}]);
+
+//   return res.status(200).json({answers});
+// }
+
+const getQuestionAnswers=async (req,res) =>{
+     let questionId=req.params.questionId;
+     
+    let topicAnswers= await AnswerSchema.find({question:questionId}).populate({path:"answeredBy",select:"username avatar"});
+
+    return res.status(200).json({topicAnswers});
+}
+
+
+module.exports={addAnswer,getQuestionAnswers};
