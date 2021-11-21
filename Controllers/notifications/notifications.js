@@ -1,4 +1,4 @@
-const NotificationSchema=require("../../models/Notifications");
+const NotificationSchema=require("../../Models/Notifications");
 
 const getNotifications = async (req,res) =>{
 

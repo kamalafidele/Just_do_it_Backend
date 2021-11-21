@@ -1,7 +1,7 @@
-const User=require("../../models/UserSchema");
-const ResetSchema=require("../../models/ResetPasswordSchema");
+const User=require("../../Models/UserSchema");
+const ResetSchema=require("../../Models/ResetPasswordSchema");
 const bcrypt=require("bcrypt");
-const {resetValidator}=require("../../middlewares/errorValidator");
+const {resetValidator}=require("../../Middlewares/errorValidator");
 
 
 const confirmPasswordReset= async (req,res) =>{

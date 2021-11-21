@@ -71,4 +71,4 @@ UserSchema.methods.comparePassword=function (password,next) {
     });
 }
 
-module.exports=mongoose.model("users",UserSchema);
+module.exports=mongoose.model("user",UserSchema);

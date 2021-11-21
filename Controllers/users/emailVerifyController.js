@@ -1,4 +1,4 @@
-const User=require("../../models/UserSchema");
+const User=require("../../Models/UserSchema");
 const jwt=require("jsonwebtoken");
 
 let maxAge=24*60*60*20

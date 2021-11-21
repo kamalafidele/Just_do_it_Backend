@@ -4,7 +4,7 @@ const clientId=key.google4.clientID
 const clientSecret=key.google4.clientSecret
 const client=new OAuth2Client(clientId,clientSecret);
 const jwt=require("jsonwebtoken");
-const User=require("../../models/UserSchema");
+const User=require("../../Models/UserSchema");
 
 
 let maxAge=24*60*60*20

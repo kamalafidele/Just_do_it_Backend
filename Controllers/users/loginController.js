@@ -1,6 +1,6 @@
-const User=require("../../models/UserSchema");
+const UserSchema=require("../../Models/UserSchema");
 const jwt=require("jsonwebtoken");
-const {loginValidator}=require("../../middlewares/errorValidator");
+const {loginValidator}=require("../../Middlewares/errorValidator");
 
 let maxAge=24*60*60*20;
 const createToken=(_id) =>{
@@ -22,7 +22,7 @@ const handleLogin= async function(req, res, next){
          return  res.status(400).json({error:result.error.details[0].message});
     }else{
            email=email.toLowerCase();
-           let user=await User.findOne({email:email}).exec();
+           let user=await UserSchema.findOne({email:email}).exec();
            if(!user){
                  return res.status(400).json({error:"Please try again or sign in with google"});
            }else{
