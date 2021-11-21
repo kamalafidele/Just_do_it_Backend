@@ -4,7 +4,7 @@ const handleRegister=require("../Controllers/users/registerController")
 const handleLogin=require("../Controllers/users/loginController");
 const handleEmailVerification=require("../Controllers/users/emailVerifyController")
 const googleLogin=require("../Controllers/users/googleLogin");
-const {resetPassword,resendCode}=require("../controllers/users/resetPassword");
+const {resetPassword,resendCode}=require("../Controllers/users/resetPassword");
 const confirmPasswordReset=require("../Controllers/users/confirmPasswordReset");
 
 
