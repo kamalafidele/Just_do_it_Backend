@@ -1,11 +1,11 @@
 const router=require("express").Router();
 
-const handleRegister=require("../controllers/users/registerController")
-const handleLogin=require("../controllers/users/loginController");
-const handleEmailVerification=require("../controllers/users/emailVerifyController")
-const googleLogin=require("../controllers/users/googleLogin");
+const handleRegister=require("../Controllers/users/registerController")
+const handleLogin=require("../Controllers/users/loginController");
+const handleEmailVerification=require("../Controllers/users/emailVerifyController")
+const googleLogin=require("../Controllers/users/googleLogin");
 const {resetPassword,resendCode}=require("../controllers/users/resetPassword");
-const confirmPasswordReset=require("../controllers/users/confirmPasswordReset");
+const confirmPasswordReset=require("../Controllers/users/confirmPasswordReset");
 
 
 router.post("/register",handleRegister);
