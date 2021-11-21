@@ -27,7 +27,7 @@ const logger=(req,res,next) =>{
 }
 
 var corsOptions = {
-    origin: ['https://justdoit-rw.tech/'],
+    origin: ['https://justdoit-rw.tech','http://localhost:3000'],
     optionsSuccessStatus: 200 
   }
 
@@ -35,11 +35,12 @@ dotenv.config();
 app.use(express.json({limit:'5mb'}));
 app.use(express.urlencoded({limit:'2mb',extended:true}));
 app.use(cors(corsOptions));
+
 app.use(logger);
-// app.use(function(req, res, next) {
-//   res.setHeader("Access-Control-Allow-Origin", "*");
-//   next();
-//   });
+app.use(function(req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  next();
+  });
 
 //Routes
 app.use("/api/justdoit/users",userRoutes);
