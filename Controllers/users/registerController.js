@@ -48,13 +48,15 @@ const handleRegister= async function(req,res,next) {
                       subject:"Please confirm your account ",
                       html:`
                       <div>
-                      <img src="https://res.cloudinary.com/justdoit/image/upload/v1637511585/users/images/Just_logo_ubuaty.jpg" 
-                      style="margin: 10px auto; border-radius: 4px; border: 1px solid dodgerblue;" alt="JustDoIt">
-                      <h1>JustDoIt</h1>
+
+                      <div class="img-co" style="display: flex; justify-content: center;">
+                      <img src="https://res.cloudinary.com/justdoit/image/upload/v1637511585/users/images/Just_logo_ubuaty.jpg" alt="im" style="width: 150px; height: 100px; border-radius: 5px;">
+                      </div>
+                     <h1 style="text-align: center;">JustDoIt</h1>
                       <h1>Email confirmation to JustDoIt account </h1>
                       <h2>Hello ${username} </h2>
                       <p>Thank you for registering with JustDoIt. Please confirm your email </p>
-                      <p> <a href="http://localhost:4200/verifyEmail/${uniqueNumber}"> Verify your Account </a> </p>
+                      <p> <a href="http://localhost:4200/verifyEmail/${uniqueNumber}" style="text-decoration: none; border-radius: 4px; background-color: dodgerblue; color: white; padding: 10px;"> Verify your Account </a> </p>
                       <p style="padding: 10px; text-align: center; color: white; background: dodgerblue;">
                       Copyright © 2021 - JustDoIt. All Rights and Policies Reserved</p>
                       </div>
