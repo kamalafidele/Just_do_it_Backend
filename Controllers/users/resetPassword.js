@@ -30,7 +30,7 @@ return res.status(400).json({error:validateResult.error.details[0].message});
             subject:"Reset your MBONERA Account password ",
             html:`
                 <div>
-                <img src="https://res.cloudinary.com/find-yours/image/upload/v1634134419/Default-images/logo_u5tflg.png" 
+                <img src="https://res.cloudinary.com/justdoit/image/upload/v1637511585/users/images/Just_logo_ubuaty.jpg" 
                 style=" margin-left: auto; border-radius: 4px; border: 1px solid dodgerblue;" alt="shaka">
                 <h1>MBONERA</h1>
                 <h2>Hello ${userExist.firstname + " " + userExist.lastname}</h2>

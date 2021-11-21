@@ -42,7 +42,8 @@ const handleLogin= async function(req, res, next){
                               return  res.status(200).json({token,user:{
                                    username:user.username,
                                    email:user.email,
-                                   profile:user.avatar
+                                   profile:user.avatar,
+                                   isPro:user.isPro
                               }});
                   })
                   
