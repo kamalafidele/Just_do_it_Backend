@@ -52,7 +52,7 @@ const handleRegister= async function(req,res,next) {
                       <div class="img-co" style="display: flex; justify-content: center;">
                       <img src="https://res.cloudinary.com/justdoit/image/upload/v1637511585/users/images/Just_logo_ubuaty.jpg" alt="im" style="width: 150px; height: 100px; border-radius: 5px;">
                       </div>
-                     <h1 style="text-align: center;">JustDoIt</h1>
+                     <h1 style="text-align: left; padding-left: 5px">JustDoIt</h1>
                       <h1>Email confirmation to JustDoIt account </h1>
                       <h2>Hello ${username} </h2>
                       <p>Thank you for registering with JustDoIt. Please confirm your email </p>
