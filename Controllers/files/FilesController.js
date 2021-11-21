@@ -1,7 +1,7 @@
 const router = require('express').Router();
-const User = require("../../models/UserSchema");
+const User = require("../../Models/UserSchema");
 const cloudinary = require('cloudinary');
-const NotificationSchema=require("../../models/Notifications");
+const NotificationSchema=require("../../Models/Notifications");
 
 cloudinary.config({ 
   cloud_name: 'justdoit', 

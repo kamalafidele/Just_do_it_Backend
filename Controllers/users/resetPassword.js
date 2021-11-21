@@ -1,7 +1,7 @@
-const User=require("../../models/UserSchema");
-const transporter=require("../../middlewares/emailTransporter");
-const ResetSchema=require("../../models/ResetPasswordSchema");
-const {emailValidator}=require("../../middlewares/errorValidator");
+const User=require("../../Models/UserSchema");
+const transporter=require("../../Middlewares/emailTransporter");
+const ResetSchema=require("../../Models/ResetPasswordSchema");
+const {emailValidator}=require("../../Middlewares/errorValidator");
 
 const resetPassword=async (req,res) =>{
 let email=req.body.email;
