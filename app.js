@@ -36,6 +36,10 @@ app.use(cors());
 app.use(express.json({limit:'5mb'}));
 app.use(express.urlencoded({limit:'2mb',extended:true}));
 app.use(logger);
+app.use(function(req, res, next) {
+  res.setHeader("Access-Control-Allow-Origin", "*");
+  next();
+  });
 
 //Routes
 app.use("/api/justdoit/users",userRoutes);
@@ -52,8 +56,8 @@ app.use(function(req,res){
 
 //LISTENING TO THE PORT
 
-const PORT=process.env.PORT || 3400;
-app.listen(PORT, () =>{
+const port=process.env.PORT || 5500;
+app.listen(port, () =>{
 
-    log(`App running on port ${PORT}`);
+    log(`App running on port ${port}`);
 })

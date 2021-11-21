@@ -1,4 +1,4 @@
-const User=require("../../models/UserSchema");
+const UserSchema=require("../../models/UserSchema");
 const gravatar=require("gravatar");
 const transporter=require("../../middlewares/emailTransporter");
 const {signupValidator} =require("../../middlewares/errorValidator");
@@ -22,7 +22,7 @@ const handleRegister= async function(req,res,next) {
         if(confirmPassword!==password) {
              return  res.status(400).json({error:"Passwords don't match"})
         }
-        let userExist= await User.findOne({email:email}).exec();
+        let userExist= await UserSchema.findOne({email:email}).exec();
         if(userExist) {
              return  res.status(400).json({error:"User with that email already exists"});
         }else{
@@ -34,7 +34,7 @@ const handleRegister= async function(req,res,next) {
 
         let uniqueNumber=Math.floor(Math.random()*1022052)+"-"+Date.now();
 
-        const user= await new  User({username,email,password,
+        const user= await new  UserSchema({username,email,password,
             avatar:"https://res.cloudinary.com/find-yours/image/upload/v1633708950/users/images/Person1_t6fjtq.png",
             status:"Pending",uniqueCode:uniqueNumber,isGoogleUser:false});
  
@@ -62,7 +62,7 @@ const handleRegister= async function(req,res,next) {
                }, (err) => {
                       if(err) { 
                              console.log(err);
-                            User.findOneAndDelete({email:email})
+                            UserSchema.findOneAndDelete({email:email})
                             .then(() =>{
                                    return res.status(500).json({error:"Something wrong! Try again"});
                             })
