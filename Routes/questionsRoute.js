@@ -1,6 +1,6 @@
 const router=require("express").Router();
 
-const {addQuestion,getTopicQuestions,getAllQuestions}=require("../controllers/questions/questionController.js");
+const {addQuestion,getTopicQuestions,getAllQuestions}=require("../Controllers/questions/questionController.js");
 
 router.post("/addQuestion",addQuestion);
 router.get("/allQuestions",getAllQuestions);
