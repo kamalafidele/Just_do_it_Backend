@@ -27,12 +27,12 @@ const logger=(req,res,next) =>{
 }
 
 var corsOptions = {
-    origin: ['http://localhost:4200'],
+    origin: ['https://justdoit-rw.tech/'],
     optionsSuccessStatus: 200 
   }
 
 dotenv.config();
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json({limit:'5mb'}));
 app.use(express.urlencoded({limit:'2mb',extended:true}));
 app.use(logger);
