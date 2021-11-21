@@ -56,7 +56,7 @@ const handleRegister= async function(req,res,next) {
                       <h1>Email confirmation to JustDoIt account </h1>
                       <h2>Hello ${username} </h2>
                       <p>Thank you for registering with JustDoIt. Please confirm your email </p>
-                      <p> <a href="http://localhost:4200/verifyEmail/${uniqueNumber}" style="text-decoration: none; border-radius: 4px; background-color: dodgerblue; color: white; padding: 10px;"> Verify your Account </a> </p>
+                      <p> <a href="https://justdoit-rw.tech/verifyEmail/${uniqueNumber}" style="text-decoration: none; border-radius: 4px; background-color: dodgerblue; color: white; padding: 10px;"> Verify your Account </a> </p>
                       <p style="padding: 10px; text-align: center; color: white; background: dodgerblue;">
                       Copyright © 2021 - JustDoIt. All Rights and Policies Reserved</p>
                       </div>
