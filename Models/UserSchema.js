@@ -26,6 +26,10 @@ const UserSchema=new mongoose.Schema({
     },
     isGoogleUser:{
         type:Boolean
+    },
+    isPro:{
+        type:Boolean,
+        default:false
     }
 });
 

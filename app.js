@@ -8,6 +8,8 @@ const workspaceRoutes=require("./Routes/workspaceRoute");
 const tokenChecker=require("./Middlewares/tokenAuth");
 const questionsRoute=require("./Routes/questionsRoute");
 const answerRoute=require("./Routes/answerRoutes");
+const filesRoute=require("./Routes/fileRoutes");
+const notificationRoute=require("./Routes/notificationRoute");
 
 //Database connection
 const URL="mongodb+srv://fidele:123@cluster0.n9af1.mongodb.net/justdoitrw?retryWrites=true&w=majority";
@@ -40,7 +42,8 @@ app.use("/api/justdoit/users",userRoutes);
 app.use("/api/justdoit/workspaces",tokenChecker,workspaceRoutes);
 app.use("/api/justdoit/questions",tokenChecker,questionsRoute);
 app.use("/api/justdoit/answers",tokenChecker,answerRoute);
-
+app.use("/api/justdoit/userFiles",tokenChecker,filesRoute);
+app.use("/api/justdoit/userNotifications",tokenChecker,notificationRoute);
 //NOT FOUND ERROR
 app.use(function(req,res){ 
     return  res.status(404).json({error:"Sorry, the page you are looking for was not found "});
