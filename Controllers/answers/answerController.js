@@ -67,9 +67,7 @@ const getQuestionAnswers=async (req,res) =>{
      let questionId=req.params.questionId;
      
      try{
-      let questionAnswers= await AnswerSchema.find({question:questionId}).populate([{path:"answeredBy",select:"username avatar isPro"},
-      {path:"question",select:"askedBy"}
-    ]);
+      let questionAnswers= await AnswerSchema.find({question:questionId}).populate([{path:"answeredBy",select:"username avatar isPro"}]);
       
       return res.status(200).json({questionAnswers});
      }catch(err){
