@@ -3,7 +3,7 @@ const router=require("express").Router();
 const {addAnswer,getQuestionAnswers,upVote,downVote}=require("../Controllers/answers/answerController")
 
 router.post("/addAnswer",addAnswer);
-router.get("/questionAnswers",getQuestionAnswers);
+router.get("/questionAnswers/:questionId",getQuestionAnswers);
 router.post("/upVoteAnswer",upVote);
 router.post("/downVoteAnswer",downVote);
 
