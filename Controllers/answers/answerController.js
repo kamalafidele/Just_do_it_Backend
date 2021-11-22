@@ -66,9 +66,13 @@ const addAnswer= async (req,res) =>{
 const getQuestionAnswers=async (req,res) =>{
      let questionId=req.params.questionId;
      
-    let topicAnswers= await AnswerSchema.find({question:questionId}).populate({path:"answeredBy",select:"username avatar isPro"});
+     try{
+      let questionAnswers= await AnswerSchema.find({question:questionId}).populate({path:"answeredBy",select:"username avatar isPro"});
 
-    return res.status(200).json({topicAnswers});
+      return res.status(200).json({questionAnswers});
+     }catch(err){
+      return res.status(500).json({error:"Internal error occured! Try again"})
+     }
 }
 
 const upVote = async (req,res) =>{
