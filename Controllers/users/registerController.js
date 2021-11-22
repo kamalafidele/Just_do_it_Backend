@@ -14,8 +14,12 @@ const handleRegister= async function(req,res,next) {
     if(email=="" && password=="" && username=="" && confirmPassword==""){
        return res.status(400).json({error:"Please fill all required fields"});    
 }
+
+if(email.includes("testing") || email.includes("user")){
+       return  res.status(400).json({error:"use a valid email please"});
+}
      
-    if(result.error) {
+    if(result.error ) {
             return  res.status(400).json({error:result.error.details[0].message});
     } else {
  
@@ -49,7 +53,7 @@ const handleRegister= async function(req,res,next) {
                       html:`
                       <div>
 
-                      <div class="img-co" style="display: flex; justify-content: center;">
+                      <div>
                       <img src="https://res.cloudinary.com/justdoit/image/upload/v1637511585/users/images/Just_logo_ubuaty.jpg" alt="im" style="width: 150px; height: 100px; border-radius: 5px;">
                       </div>
                      <h1 style="text-align: left; padding-left: 5px">JustDoIt</h1>
