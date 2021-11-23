@@ -52,16 +52,13 @@ if(email.includes("testing") || email.includes("user")){
                       subject:"Please confirm your account ",
                       html:`
                       <div>
-
-                      <div>
                       <img src="https://res.cloudinary.com/justdoit/image/upload/v1637511585/users/images/Just_logo_ubuaty.jpg" alt="im" style="width: 150px; height: 100px; border-radius: 5px;">
-                      </div>
                      <h1 style="text-align: left; padding-left: 5px">JustDoIt</h1>
                       <h1>Email confirmation to JustDoIt account </h1>
                       <h2>Hello ${username} </h2>
                       <p>Thank you for registering with JustDoIt. Please confirm your email </p>
-                      <p> <a href="https://justdoit-rw.tech/verifyEmail/${uniqueNumber}" style="text-decoration: none; border-radius: 4px; background-color: dodgerblue; color: white; padding: 10px;"> Verify your Account </a> </p>
-                      <p style="padding: 10px; text-align: center; color: white; background: dodgerblue;">
+                      <p> <a href="https://www.justdoit-rw.tech/verifyEmail/${uniqueNumber}" style="text-decoration: none; border-radius: 4px; background-color: dodgerblue; color: white; padding: 10px;"> Verify your Account </a> </p>
+                      <p style="padding: 10px; text-align: center; color: white; background: dodgerblue;margin-top:10px;">
                       Copyright © 2021 - JustDoIt. All Rights and Policies Reserved</p>
                       </div>
                       `
