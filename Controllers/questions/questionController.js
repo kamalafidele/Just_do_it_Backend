@@ -24,8 +24,13 @@ const getAllQuestions= async (req,res) =>{
   try{
     let questions= await QuestionSchema.find().populate([{path:"topic",select:"name picture"},
     {path:"askedBy",select:"username avatar isPro"},{path:"answertoshow"}]);
-  
+
+    for(let i=0; i<questions.length; i++){
+      questions.sort((a,b) => {return b.createdAt - a.createdAt});
+    }
+
     return res.status(200).json({questions});
+
   }catch(err){
     return res.status(500).json({error:"Internal server error occured! Try again "})
   }
@@ -38,6 +43,10 @@ const getTopicQuestions=async (req,res) =>{
       let topicQuestions= await QuestionSchema.find({topic:workspaceId}).populate([{path:"topic",select:"name picture"},
       {path:"askedBy",select:"username avatar isPro"},{path:"answertoshow"}]);
   
+      for(let i=0; i<topicQuestions.length; i++){
+        topicQuestions.sort((a,b) => {return a.createdAt - b.createdAt});
+      }
+       
       return res.status(200).json({topicQuestions});
     } catch(err){
       return res.status(500).json({error:"Internal server error occured! Try again "})

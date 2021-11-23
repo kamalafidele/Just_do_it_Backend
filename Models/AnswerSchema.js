@@ -20,6 +20,6 @@ const AnswerSchema=new Schema({
         default:0
     },
     images:[{type:String}]
-});
+},{timestamps:true});
 
 module.exports=mongoose.model("answers",AnswerSchema);
