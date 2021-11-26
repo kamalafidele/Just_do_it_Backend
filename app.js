@@ -10,6 +10,8 @@ const questionsRoute=require("./Routes/questionsRoute");
 const answerRoute=require("./Routes/answerRoutes");
 const filesRoute=require("./Routes/fileRoutes");
 const notificationRoute=require("./Routes/notificationRoute");
+const cronJob=require("cron").CronJob;
+const sendDailyEmail=require("./dailyCheck");
 
 //Database connection
 const URL="mongodb+srv://fidele:123@cluster0.n9af1.mongodb.net/justdoitrw?retryWrites=true&w=majority";
@@ -54,6 +56,12 @@ app.use(function(req,res){
     return  res.status(404).json({error:"Sorry, the page you are looking for was not found "});
   });
 
+//RUNNING FOR EVERY DAY 
+var job=new cronJob('0 3 * * *',function(){
+  sendDailyEmail();
+},null,true,'America/Los_Angeles');
+
+ job.start();  
 
 //LISTENING TO THE PORT
 
