@@ -49,6 +49,7 @@ const sendDailyEmail= async () =>{
              </div>           
               `
         });
+        console.log(`Email ${i} sent.....`);
     } 
 
    }
