@@ -57,9 +57,9 @@ app.use(function(req,res){
   });
 
 //RUNNING FOR EVERY DAY 
-var job=new cronJob('10 3 * * *',function(){
+var job=new cronJob('30 15 * * *',function(){
   sendDailyEmail();
-},null,true,'America/Los_Angeles');
+},null,true,'Africa/Kigali');
 
  job.start();  
 
