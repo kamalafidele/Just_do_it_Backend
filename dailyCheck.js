@@ -23,7 +23,7 @@ const sendDailyEmail= async () =>{
                 <p style="font-size: 18px;">Your collegues are busy discussing more about different topics.</p> 
                 <div style="background-color: white;border-radius: 2px;margin-top: 3px;min-height: 80px;padding: 5px;">
                    <div style="display: flex; justify-content:flex-start; padding: 5px; align-items: center;">
-                     <img src="${todayQuestions[0].askedBy.avatar}" style="width: 60px;height: 60px;border-radius: 50%;" >
+                     <img src="${todayQuestions[0].askedBy.avatar}" style="width: 60px;height: 60px;border-radius: 50%;" alt="${todayQuestions[0].askedBy.username}" >
                      <h3><strong style="padding-left: 10px;">${todayQuestions[0].askedBy.username}</strong></h3>
                    </div>
                    <div>
@@ -35,7 +35,7 @@ const sendDailyEmail= async () =>{
                         ? 
                         `<p style="font-size: 22px;">${todayQuestions[0].answertoshow.answer}</p>
                         ${todayQuestions[0].answertoshow.images.length > 0 ? 
-                        ` <img src="${todayQuestions[0].answertoshow.images}" style="width: 70%;height: 350px;margin-left: 5px;" >` : ``
+                        ` <img src="${todayQuestions[0].answertoshow.images}" style="width: 70%;height: 350px;margin-left: 5px;" alt="answer-pic" >` : ``
                         }
                         ` 
                         : 
