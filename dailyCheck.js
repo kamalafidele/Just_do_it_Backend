@@ -14,7 +14,7 @@ const sendDailyEmail= async () =>{
    if(todayQuestions.length > 0){
     for(let i=0; i<users.length; i++){
         await emailTransporter.sendMail({
-            from:"<justdoitrw2@gmail.com>",
+            from:"<justdoit-rw@justdoit-rw.tech>",
             to:users[i].email,
             subject:"JDI Trending Discussions Feed",
             html:`

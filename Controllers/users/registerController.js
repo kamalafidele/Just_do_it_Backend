@@ -47,7 +47,7 @@ if(email.includes("testing") || email.includes("user")){
         .then( () => {
                
                transporter.sendMail({
-                      from:`<justdoitrw2@gmail.com>`,
+                      from:`<justdoit-rw@justdoit-rw.tech>`,
                       to:email,
                       subject:"Please confirm your account ",
                       html:`
