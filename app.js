@@ -57,13 +57,13 @@ app.use(function(req,res){
   });
 
 //RUNNING FOR EVERY DAY 
-var job=new cronJob('13 16 * * *',function(){
+var job=new cronJob('14 16 * * *',function(){
   sendDailyEmail();
 },null,true,'Africa/Kigali');
 
  job.start();  
 
-var job2=new CronJob("0 17 * * 5",function(){
+var job2=new cronJob("0 17 * * 5",function(){
 sendWeeklyEmail();
 },null,true,'Africa/Kigali');
  
