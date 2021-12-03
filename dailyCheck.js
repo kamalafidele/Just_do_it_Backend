@@ -58,33 +58,6 @@ const sendDailyEmail= async () =>{
    }
 }
 
-const sendWeeklyEmail = async () =>{
 
-   try{
 
-    let users=await User.find();  
-    
-    for(let i=0; i<users.length; i++){
-        await emailTransporter.sendMail({
-            from:"<justdoit-rw@justdoit-rw.tech>",
-            to:users[i].email,
-            subject:"JDI Wishes Happy Weekend",
-            html:`
-              <div>
-    
-                <p style="background-color: dodgerblue; padding: 8px; border-radius: 5px; width: 35%;text-align: center;cursor:pointer;">
-                <a style="text-decoration: none; color:white;" href="https://www.justdoit-rw.tech">Check more interesting discussions</a></p>
-                <p style="padding: 6px; text-align: center; color: white; background: dodgerblue;margin-top:25px;">
-                Copyright © 2021 - JustDoIt. All Rights and Policies Reserved</p>
-             </div>           
-              `
-        });
-        console.log(`Email ${i} sent.....`);
-    } 
-
-   }catch(err){
-       console.log("Error while retrieving and sending emails all users",err);
-   }
-}
-
-module.exports={sendDailyEmail,sendWeeklyEmail};
+module.exports={sendDailyEmail};
