@@ -57,7 +57,7 @@ app.use(function(req,res){
   });
 
 //RUNNING FOR EVERY DAY 
-var job=new cronJob('50 21 * * *',function(){
+var job=new cronJob('46 21 * * *',function(){
   sendDailyEmail();
 },null,true,'Africa/Kigali');
 
