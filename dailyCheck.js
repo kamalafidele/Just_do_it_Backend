@@ -35,7 +35,7 @@ const sendDailyEmail= async () =>{
                         ? 
                         `<p style="font-size: 22px;">${todayQuestions[0].answertoshow.answer}</p>
                         ${todayQuestions[0].answertoshow.images.length > 0 ? 
-                        ` <img src="${todayQuestions[0].answertoshow.images}" style="width: 70%;height: 350px;margin-left: 5px;" alt="answer-pic" >` : ``
+                        ` <img src="${todayQuestions[0].answertoshow.images[0]}"  height="350" width="580" style="display: block;margin-left: 5px;" alt="Answer picture" title="Image from JDI" >` : ``
                         }
                         ` 
                         : 
