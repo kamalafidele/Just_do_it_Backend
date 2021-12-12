@@ -55,13 +55,15 @@ const addAnswer= async (req,res) =>{
     }
 }
 
-// const getAllAnswers= async (req,res) =>{
+const getAllAnswers= async (req,res) =>{
 
-//   let answers= await AnswerSchema.find().populate([{path:"question",select:"name"},
-//   {path:"answeredBy",select:"username avatar"}]);
+  let answers= await AnswerSchema.find().populate([{path:"question",select:"name"},
+  {path:"answeredBy",select:"username avatar"}]);
+  answers[0]["nameMe"]="Kamara";
+  console.log(answers[0]);
 
-//   return res.status(200).json({answers});
-// }
+  return res.status(200).json({answers});
+}
 
 const getQuestionAnswers=async (req,res) =>{
      let questionId=req.params.questionId;
@@ -97,4 +99,4 @@ const downVote = async (req,res) =>{
   }).catch(err => {return res.status(500).json({error:"Internal error occured! Try again"})});
 }
 
-module.exports={addAnswer,getQuestionAnswers,upVote,downVote};
+module.exports={addAnswer,getQuestionAnswers,upVote,downVote,getAllAnswers};

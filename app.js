@@ -29,7 +29,7 @@ const logger=(req,res,next) =>{
 }
 
 var corsOptions = {
-    origin: ['https://justdoit-rw.tech','http://localhost:4200'],
+    origin: ['https://justdoit-rw.tech','http://localhost:4200','http://localhost:3000'],
     optionsSuccessStatus: 200 
   }
 
@@ -57,7 +57,7 @@ app.use(function(req,res){
   });
 
 //RUNNING FOR EVERY DAY 
-var job=new cronJob('0 13 * * *',function(){
+var job=new cronJob('0 15 * * 3',function(){
   sendDailyEmail();
 },null,true,'Africa/Kigali');
 
