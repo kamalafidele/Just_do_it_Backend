@@ -11,7 +11,7 @@ const answerRoute=require("./Routes/answerRoutes");
 const filesRoute=require("./Routes/fileRoutes");
 const notificationRoute=require("./Routes/notificationRoute");
 const cronJob=require("cron").CronJob;
-const {sendDailyEmail}=require("./dailyCheck");
+const {sendWeeklyEmail,happyWeekEmail}=require("./dailyCheck");
 
 //Database connection
 const URL="mongodb+srv://fidele:123@cluster0.n9af1.mongodb.net/justdoitrw?retryWrites=true&w=majority";
@@ -58,16 +58,16 @@ app.use(function(req,res){
 
 //RUNNING FOR EVERY DAY 
 var job=new cronJob('0 15 * * 3',function(){
-  sendDailyEmail();
+  sendWeeklyEmail();
 },null,true,'Africa/Kigali');
 
  job.start();  
 
-// var job2=new cronJob("0 17 * * 5",function(){
-// sendWeeklyEmail();
-// },null,true,'Africa/Kigali');
+var job2=new cronJob("0 16 * * 5",function(){
+  happyWeekEmail();
+},null,true,'Africa/Kigali');
  
-// job2.start();
+job2.start();
 
 //LISTENING TO THE PORT
 
