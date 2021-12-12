@@ -2,7 +2,7 @@ const User=require("./Models/UserSchema");
 const emailTransporter=require("./Middlewares/emailTransporter");
 const QuestionSchema = require("./Models/QuestionSchema");
 
-const sendDailyEmail= async () =>{
+const sendWeeklyEmail= async () =>{
    try{
     let questions=await QuestionSchema.find().populate([{path:"answertoshow"},{path:"askedBy"}]);  
     let users=await User.find();  
@@ -88,5 +88,41 @@ function isThisWeek (date) {
   return date >= startOfThisWeek && date < startOfNextWeek;
 }
 
-module.exports={sendDailyEmail};
+const happyWeekEmail = async () =>{
+  try{
+    let users=await User.find();  
+
+    //for(let i=0; i<users.length; i++){
+        await emailTransporter.sendMail({
+            from:"<justdoit-rw@justdoit-rw.tech>",
+            to:"Kamalafizzet45@gmail.com",
+            subject:"JDI Happy Weekend ",
+            html:`
+              <div>
+                <h3>Hello <strong style="color: dodgerblue"> <em>${"Kamala fidele"} </em></strong></h3>
+                <p style="font-size: 18px;">JustDoIt wishes you a Happy and Nice Weekend.</p> 
+                <div>
+                  <div style="display: flex; justify-content: space-between; flex-direction: row;">
+                    <img src="https://res.cloudinary.com/justdoit/image/upload/v1639309450/questionImages/images/Week1_iccksj.jpg" alt="weekend picture 1" height="350" style="width: 48%;border-radius: 4px;">
+                    <img src="https://res.cloudinary.com/justdoit/image/upload/v1639309451/questionImages/images/Week2_trsbjj.jpg" alt="weekend picture 2" height="350" style="width: 48%; border-radius: 4px; margin-left: 10px;">
+                  </div>
+                  <div style="padding-top: 15px;">
+                     <img src="https://res.cloudinary.com/justdoit/image/upload/v1639309451/questionImages/images/Week3_y3dgb7.jpg" alt="weekend picture 3" height="400" style="width: 97%; border-radius: 5px;">
+                  </div>
+                </div>
+                <p style="background-color: dodgerblue; padding: 8px; border-radius: 5px; width: 25%;text-align: center;cursor:pointer;">
+                <a style="text-decoration: none; color:white;" href="https://www.justdoit-rw.tech">Enjoy with JDI</a></p>
+                <p style="padding: 6px; text-align: center; color: white; background: dodgerblue;margin-top:25px;">
+                Copyright © 2021 - JustDoIt. All Rights and Policies Reserved</p>
+             </div>           
+              `
+        });
+        //console.log(`Happy Week Email ${i} sent.....`);
+    //} 
+  }catch(err){
+    console.log("SENDING HAPPY WEEK EMAIL FAILED: ",err);
+  }
+}
+
+module.exports={sendWeeklyEmail,happyWeekEmail};
 
