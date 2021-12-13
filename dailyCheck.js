@@ -11,9 +11,9 @@ const sendWeeklyEmail= async () =>{
     //let todayQuestions=questions.filter(q => new Date(q.createdAt).getDate() == currentDate);
      let weekQuestions=questions.filter(q => isThisWeek(new Date(q.createdAt)));
      
-     for(let j=0; j<weekQuestions.length; j++){
-         weekQuestions.sort((a,b) => { return b.createdAt - a.createdAt });
-     }
+    //  for(let j=0; j<weekQuestions.length; j++){
+    //      weekQuestions.sort((a,b) => { return b.createdAt - a.createdAt });
+    //  }
     
 
    if(weekQuestions.length > 0){
@@ -24,7 +24,7 @@ const sendWeeklyEmail= async () =>{
             subject:"JDI Trending Discussions Feed",
             html:`
               <div>
-                <h3>Hello <strong>${users[i].userrname}</strong></h3>
+                <h3>Hello <strong>${users[i].username}</strong></h3>
                 <p style="font-size: 18px;">Your collegues are busy discussing more about different topics.</p> 
                 ${weekQuestions.map((weekQ,index) => `
                   ${index < 3 ? 
@@ -36,12 +36,12 @@ const sendWeeklyEmail= async () =>{
                     </div>
                     <div>
                       <p style="font-size: 20px;">
-                      <a href="https://www.justdoit-rw.tech"><strong>${weekQ.question}</strong></a></p>
+                      <a href="https://www.justdoit-rw.tech"><strong>${weekQ.question }</strong></a></p>
                     </div>
                     <div>
                         ${weekQ.answertoshow 
                          ? 
-                         `<p style="font-size: 22px;">${weekQ.answertoshow.answer}</p>
+                         `<p style="font-size: 22px;">${weekQ.answertoshow.answer.length > 150 ? weekQ.answertoshow.answer.substring(0,150)+"..."+"<a href='https://www.justdoit-rw.tech' style='text-decoration:none;'>Read More</a>" : weekQ.answertoshow.answer } </p>
                          ${weekQ.answertoshow.images.length > 0 ? 
                          ` <img src="${weekQ.answertoshow.images[0]}"  height="350" width="580" style="display: block;margin-left: 5px;" alt="Answer picture" title="Image from JDI" >` : ``
                          }
