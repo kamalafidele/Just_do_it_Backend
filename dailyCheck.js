@@ -92,22 +92,22 @@ const happyWeekEmail = async () =>{
   try{
     let users=await User.find();  
 
-    //for(let i=0; i<users.length; i++){
+    for(let i=0; i<users.length; i++){
         await emailTransporter.sendMail({
             from:"<justdoit-rw@justdoit-rw.tech>",
-            to:"Kamalafizzet45@gmail.com",
+            to:users[i].email,
             subject:"JDI Happy Weekend ",
             html:`
               <div>
-                <h3>Hello <strong style="color: dodgerblue"> <em>${"Kamala fidele"} </em></strong></h3>
+                <h3>Hello <strong style="color: dodgerblue"> <em>${users[i].username}</em></strong></h3>
                 <p style="font-size: 18px;">JustDoIt wishes you a Happy and Nice Weekend.</p> 
                 <div>
                   <div style="display: flex; justify-content: space-between; flex-direction: row;">
                     <img src="https://res.cloudinary.com/justdoit/image/upload/v1639309450/questionImages/images/Week1_iccksj.jpg" alt="weekend picture 1" height="350" style="width: 48%;border-radius: 4px;">
-                    <img src="https://res.cloudinary.com/justdoit/image/upload/v1639309451/questionImages/images/Week2_trsbjj.jpg" alt="weekend picture 2" height="350" style="width: 48%; border-radius: 4px; margin-left: 10px;">
+                    <img src="https://res.cloudinary.com/justdoit/image/upload/v1639470959/questionImages/images/Kevin-Gone-Fishing_txetcm.gif" alt="weekend picture 2" height="350" style="width: 48%; border-radius: 4px; margin-left: 10px;">
                   </div>
                   <div style="padding-top: 15px;">
-                     <img src="https://res.cloudinary.com/justdoit/image/upload/v1639309451/questionImages/images/Week3_y3dgb7.jpg" alt="weekend picture 3" height="400" style="width: 97%; border-radius: 5px;">
+                     <img src="https://res.cloudinary.com/justdoit/image/upload/v1639470957/questionImages/images/Quote1_fzof7a.jpg" alt="weekend picture 3" height="400" style="width: 97%; border-radius: 5px;">
                   </div>
                 </div>
                 <p style="background-color: dodgerblue; padding: 8px; border-radius: 5px; width: 25%;text-align: center;cursor:pointer;">
@@ -117,8 +117,8 @@ const happyWeekEmail = async () =>{
              </div>           
               `
         });
-        //console.log(`Happy Week Email ${i} sent.....`);
-    //} 
+        console.log(`Happy Week Email ${i} sent.....`);
+    } 
   }catch(err){
     console.log("SENDING HAPPY WEEK EMAIL FAILED: ",err);
   }
