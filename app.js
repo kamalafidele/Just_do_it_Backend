@@ -57,17 +57,17 @@ app.use(function(req,res){
   });
 
 //RUNNING FOR EVERY DAY 
-var job=new cronJob('0 16 * * 3',function(){
-  sendWeeklyEmail();
-},null,true,'Africa/Kigali');
+// var job=new cronJob('0 16 * * 3',function(){
+//   sendWeeklyEmail();
+// },null,true,'Africa/Kigali');
 
- job.start();  
+//  job.start();  
 
-var job2=new cronJob("0 16 * * 5",function(){
-  happyWeekEmail();
-},null,true,'Africa/Kigali');
+// var job2=new cronJob("0 16 * * 5",function(){
+//   happyWeekEmail();
+// },null,true,'Africa/Kigali');
  
-job2.start();
+// job2.start();
 
 //LISTENING TO THE PORT
 
