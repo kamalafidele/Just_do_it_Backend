@@ -56,12 +56,12 @@ app.use(function(req,res){
     return  res.status(404).json({error:"Sorry, the page you are looking for was not found "});
   });
 
-//RUNNING FOR EVERY DAY 
-// var job=new cronJob('0 16 * * 3',function(){
-//   sendWeeklyEmail();
-// },null,true,'Africa/Kigali');
+//RUNNING FOR ONCE A WEEK
+var job=new cronJob('0 16 * * 3',function(){
+  sendWeeklyEmail();
+},null,true,'Africa/Kigali');
 
-//  job.start();  
+ job.start();  
 
 // var job2=new cronJob("0 16 * * 5",function(){
 //   happyWeekEmail();
