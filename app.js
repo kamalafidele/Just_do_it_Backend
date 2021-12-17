@@ -63,11 +63,11 @@ app.use(function(req,res){
 
 //  job.start();  
 
-var job2=new cronJob("0 16 * * 5",function(){
-  happyWeekEmail();
-},null,true,'Africa/Kigali');
+// var job2=new cronJob("0 16 * * 5",function(){
+//   happyWeekEmail();
+// },null,true,'Africa/Kigali');
  
-job2.start();
+// job2.start();
 
 //LISTENING TO THE PORT
 
