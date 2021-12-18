@@ -6,21 +6,21 @@ const sendWeeklyEmail= async () =>{
    try{
     let questions=await QuestionSchema.find().populate([{path:"answertoshow"},{path:"askedBy"}]);  
     let users=await User.find();  
-    let currentDate=new Date().getDate();
+    //let currentDate=new Date().getDate();
 
     //let todayQuestions=questions.filter(q => new Date(q.createdAt).getDate() == currentDate);
      let weekQuestions=questions.filter(q => isThisWeek(new Date(q.createdAt)));
      
-    //  for(let j=0; j<weekQuestions.length; j++){
-    //      weekQuestions.sort((a,b) => { return b.createdAt - a.createdAt });
-    //  }
+     for(let j=0; j<weekQuestions.length; j++){
+         weekQuestions.sort((a,b) => { return b.createdAt - a.createdAt });
+     }
     
 
    if(weekQuestions.length > 0){
     for(let i=0; i<users.length; i++){
         await emailTransporter.sendMail({
             from:"<justdoit-rw@justdoit-rw.tech>",
-            to:users[i].email,
+            to:users[i].sendMail,
             subject:"JDI Trending Discussions Feed",
             html:`
               <div>
@@ -41,7 +41,7 @@ const sendWeeklyEmail= async () =>{
                     <div>
                         ${weekQ.answertoshow 
                          ? 
-                         `<p style="font-size: 22px;">${weekQ.answertoshow.answer.length > 150 ? weekQ.answertoshow.answer.substring(0,150)+"..."+"<a href='https://www.justdoit-rw.tech' style='text-decoration:none;'>Read More</a>" : weekQ.answertoshow.answer } </p>
+                         `<p style="font-size: 22px;">${weekQ.answertoshow.answer.length > 150 ? weekQ.answertoshow.answer.substring(0,150)+"..."+`<a href="https://www.justdoit-rw.tech/questionAnswers/${weekQ._id}" style='text-decoration:none;'>Read More</a>` : weekQ.answertoshow.answer } </p>
                          ${weekQ.answertoshow.images.length > 0 ? 
                          ` <img src="${weekQ.answertoshow.images[0]}"  height="350" width="580" style="display: block;margin-left: 5px;" alt="Answer picture" title="Image from JDI" >` : ``
                          }
