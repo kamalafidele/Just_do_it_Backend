@@ -14,7 +14,9 @@ const cronJob=require("cron").CronJob;
 const {sendWeeklyEmail,happyWeekEmail}=require("./dailyCheck");
 
 //Database connection
-const URL="mongodb+srv://fidele:123@cluster0.n9af1.mongodb.net/justdoitrw?retryWrites=true&w=majority";
+//mongodb+srv://fidele:123@cluster0.n9af1.mongodb.net/justdoitrw?retryWrites=true&w=majority
+//mongodb://localhost:27017
+const URL="mongodb://localhost:27017/Justdoit";
 mongoose.connect(URL, {useNewUrlParser:true, useUnifiedTopology:true})
 .then( _=>{
     console.log("APP CONNECTED ON DB");

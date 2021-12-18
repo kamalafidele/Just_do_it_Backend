@@ -1,5 +1,6 @@
 const QuestionSchema=require("../../Models/QuestionSchema");
 const cloudinary=require("cloudinary");
+const AnswerSchema=require("../../Models/AnswerSchema");
 
 cloudinary.config({ 
     cloud_name: 'justdoit', 
@@ -54,6 +55,18 @@ const getTopicQuestions=async (req,res) =>{
 
 }
 
+const getQuestionAndAnswers= async (req,res) =>{
+  try{
 
+    let questionId=req.params.questionId;
+    let question=await QuestionSchema.findById({_id:questionId}).populate([{path:"askedBy",select:"username avatar isPro"}]);
+    let answers=await AnswerSchema.find({question:questionId});
+    
+    return res.status(200).json({question:question,answers:answers});
 
-module.exports={addQuestion,getTopicQuestions,getAllQuestions};
+  }catch(err){
+    return res.status(500).json({error:"Internal server error occured! Try again "})
+  }
+}
+
+module.exports={addQuestion,getTopicQuestions,getAllQuestions,getQuestionAndAnswers};
