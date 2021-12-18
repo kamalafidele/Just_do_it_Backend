@@ -16,7 +16,7 @@ const {sendWeeklyEmail,happyWeekEmail}=require("./dailyCheck");
 //Database connection
 //mongodb+srv://fidele:123@cluster0.n9af1.mongodb.net/justdoitrw?retryWrites=true&w=majority
 //mongodb://localhost:27017
-const URL="mongodb://localhost:27017/Justdoit";
+const URL="mongodb+srv://fidele:123@cluster0.n9af1.mongodb.net/justdoitrw?retryWrites=true&w=majority";
 mongoose.connect(URL, {useNewUrlParser:true, useUnifiedTopology:true})
 .then( _=>{
     console.log("APP CONNECTED ON DB");
