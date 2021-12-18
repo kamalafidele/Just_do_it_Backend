@@ -59,7 +59,7 @@ const getQuestionAndAnswers= async (req,res) =>{
   try{
 
     let questionId=req.params.questionId;
-    let question=await QuestionSchema.findById({_id:questionId}).populate([{path:"askedBy",select:"username avatar isPro"}]);
+    let question=await QuestionSchema.findById({_id:questionId}).populate([{path:"askedBy",select:"username avatar isPro"},{path:"topic"}]);
     let answers=await AnswerSchema.find({question:questionId});
     
     return res.status(200).json({question:question,answers:answers});
