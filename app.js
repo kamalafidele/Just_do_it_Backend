@@ -16,7 +16,7 @@ const {sendWeeklyEmail,happyWeekEmail}=require("./dailyCheck");
 //Database connection
 //mongodb+srv://fidele:123@cluster0.n9af1.mongodb.net/justdoitrw?retryWrites=true&w=majority
 //mongodb://localhost:27017
-const URL="mongodb://localhost:27017/Justdoit";
+const URL="mongodb+srv://fidele:123@cluster0.n9af1.mongodb.net/justdoitrw?retryWrites=true&w=majority";
 mongoose.connect(URL, {useNewUrlParser:true, useUnifiedTopology:true})
 .then( _=>{
     console.log("APP CONNECTED ON DB");
@@ -31,7 +31,7 @@ const logger=(req,res,next) =>{
 }
 
 var corsOptions = {
-    origin: ['https://justdoit-rw.tech','http://localhost:4200','http://localhost:3000'],
+    origin: ['https://justdoit-rw.tech','http://localhost:4200'],
     optionsSuccessStatus: 200 
   }
 
