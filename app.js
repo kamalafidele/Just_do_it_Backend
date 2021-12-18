@@ -31,7 +31,7 @@ const logger=(req,res,next) =>{
 }
 
 var corsOptions = {
-    origin: ['https://justdoit-rw.tech','http://localhost:4200','http://localhost:3000'],
+    origin: ['https://justdoit-rw.tech','http://localhost:4200'],
     optionsSuccessStatus: 200 
   }
 
