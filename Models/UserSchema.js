@@ -30,6 +30,10 @@ const UserSchema=new mongoose.Schema({
     isPro:{
         type:Boolean,
         default:false
+    },
+    darkMode:{
+        type:Boolean,
+        default:false
     }
 });
 
