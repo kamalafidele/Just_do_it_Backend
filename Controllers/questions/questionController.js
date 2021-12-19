@@ -45,7 +45,7 @@ const getTopicQuestions=async (req,res) =>{
       {path:"askedBy",select:"username avatar isPro"},{path:"answertoshow"}]);
   
       for(let i=0; i<topicQuestions.length; i++){
-        topicQuestions.sort((a,b) => {return a.createdAt - b.createdAt});
+        topicQuestions.sort((a,b) => {return b.createdAt - a.createdAt});
       }
        
       return res.status(200).json({topicQuestions});
