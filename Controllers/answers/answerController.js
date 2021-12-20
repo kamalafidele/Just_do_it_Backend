@@ -13,7 +13,7 @@ async function upload(imagesNum,imagedata){
     let img;
     for(let i=0; i<imagesNum; i++){
         img = await cloudinary.v2.uploader.upload(imagedata[i],{folder: 'answerImages/images',
-            allowed_formats:['png','jpg','webp','svg','jfif']});
+            allowed_formats:['png','jpg','webp','svg','jfif','gif']});
             imagesUrl.push(img.url);
      }
  
