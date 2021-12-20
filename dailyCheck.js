@@ -10,7 +10,7 @@ const sendWeeklyEmail= async () =>{
 
     //let todayQuestions=questions.filter(q => new Date(q.createdAt).getDate() == currentDate);
      let weekQuestions=questions.filter(q => isThisWeek(new Date(q.createdAt)));
-     
+
      for(let j=0; j<weekQuestions.length; j++){
          weekQuestions.sort((a,b) => { return b.createdAt - a.createdAt });
      }
