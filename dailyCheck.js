@@ -20,10 +20,11 @@ const sendWeeklyEmail= async () =>{
     for(let i=0; i<users.length; i++){
         await emailTransporter.sendMail({
             from:"<justdoit-rw@justdoit-rw.tech>",
-            to:users[i].sendMail,
-            subject:"JDI Trending Discussions Feed",
+            to:users[i].email,
+            subject:weekQuestions[0].question,
             html:`
               <div>
+                <h1 style="text-align: center;">JDI Trending Discussions Feed</h1>
                 <h3>Hello <strong>${users[i].username}</strong></h3>
                 <p style="font-size: 18px;">Your collegues are busy discussing more about different topics.</p> 
                 ${weekQuestions.map((weekQ,index) => `

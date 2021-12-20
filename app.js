@@ -13,6 +13,7 @@ const notificationRoute=require("./Routes/notificationRoute");
 const cronJob=require("cron").CronJob;
 const {sendWeeklyEmail,happyWeekEmail}=require("./dailyCheck");
 
+
 //Database connection
 //mongodb+srv://fidele:123@cluster0.n9af1.mongodb.net/justdoitrw?retryWrites=true&w=majority
 //mongodb://localhost:27017/Justdoit
@@ -59,7 +60,7 @@ app.use(function(req,res){
   });
 
 //RUNNING FOR ONCE A WEEK
-// var job=new cronJob('0 16 * * 3',function(){
+// var job=new cronJob('55 10 * * 1',function(){
 //   sendWeeklyEmail();
 // },null,true,'Africa/Kigali');
 
