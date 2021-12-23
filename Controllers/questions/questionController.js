@@ -13,11 +13,15 @@ const addQuestion= async (req,res) =>{
   let {topic,question}=req.body;
   let user=req.user;
 
-  const createdQuestion=new QuestionSchema({question:question,topic:topic,askedBy:user._id})
-  createdQuestion.save()
-  .then(() => { return res.status(200).json({message:"Question added successfully."})})
-  .catch(err => {console.log("Adding question ERR: ",err); return res.status(500).json({message:"Internal server error occured! Try again "})});
-
+  if(question.includes("H") || question.includes("T")){
+      return res.status(400).json({error:"An invalid question"});
+  }else{
+    const createdQuestion=new QuestionSchema({question:question,topic:topic,askedBy:user._id})
+    createdQuestion.save()
+    .then(() => { return res.status(200).json({message:"Question added successfully."})})
+    .catch(err => {console.log("Adding question ERR: ",err); return res.status(500).json({message:"Internal server error occured! Try again "})});
+  
+  }
 }
 
 const getAllQuestions= async (req,res) =>{

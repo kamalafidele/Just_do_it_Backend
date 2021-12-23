@@ -97,18 +97,18 @@ const happyWeekEmail = async () =>{
         await emailTransporter.sendMail({
             from:"<justdoit-rw@justdoit-rw.tech>",
             to:users[i].email,
-            subject:"JDI Happy Weekend ",
+            subject:"JDI Happy and Merry Christmas",
             html:`
               <div>
                 <h3>Hello <strong style="color: dodgerblue"> <em>${users[i].username}</em></strong></h3>
-                <p style="font-size: 18px;">JustDoIt wishes you a Happy and Nice Weekend.</p> 
+                <p style="font-size: 18px;">JustDoIt wishes you a Merry Christmas and Happy  New Year.</p> 
                 <div>
                   <div style="display: flex; justify-content: space-between; flex-direction: row;">
-                    <img src="https://res.cloudinary.com/justdoit/image/upload/v1639309450/questionImages/images/Week1_iccksj.jpg" alt="weekend picture 1" height="350" style="width: 48%;border-radius: 4px;">
-                    <img src="https://res.cloudinary.com/justdoit/image/upload/v1639470959/questionImages/images/Kevin-Gone-Fishing_txetcm.gif" alt="weekend picture 2" height="350" style="width: 48%; border-radius: 4px; margin-left: 10px;">
+                    <img src="https://res.cloudinary.com/justdoit/image/upload/v1640105632/questionImages/images/Happy-Christmas-Day_zexvrc.jpg" alt="weekend picture 1" height="350" style="width: 48%;border-radius: 4px;">
+                    <img src="https://res.cloudinary.com/justdoit/image/upload/v1640105632/questionImages/images/happy-christmas-merry-christmas_mmm20s.gif" alt="weekend picture 2" height="350" style="width: 48%; border-radius: 4px; margin-left: 10px;">
                   </div>
                   <div style="padding-top: 15px;">
-                     <img src="https://res.cloudinary.com/justdoit/image/upload/v1639470957/questionImages/images/Quote1_fzof7a.jpg" alt="weekend picture 3" height="400" style="width: 97%; border-radius: 5px;">
+                     <img src="https://res.cloudinary.com/justdoit/image/upload/v1640105631/questionImages/images/Quote_r00vch.jpg" alt="weekend picture 3" height="400" style="width: 97%; border-radius: 5px;">
                   </div>
                 </div>
                 <p style="background-color: dodgerblue; padding: 8px; border-radius: 5px; width: 25%;text-align: center;cursor:pointer;">
