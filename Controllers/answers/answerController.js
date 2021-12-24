@@ -79,10 +79,12 @@ const getQuestionAnswers=async (req,res) =>{
 
 const upVote = async (req,res) =>{
     let answerId=req.body.answerId;
-    let answerToUpvote=await AnswerSchema.findOne({_id:answerId});
-    let newVote=answerToUpvote.upVotes+1;
+    let isReduce=req.body.isReduce;
 
-    AnswerSchema.findOneAndUpdate({_id:answerId},{upVotes:newVote})
+    let answerToUpvote=await AnswerSchema.findOne({_id:answerId});
+    let newVote=answerToUpvote.upVotes;
+
+    AnswerSchema.findOneAndUpdate({_id:answerId},{upVotes: isReduce ? newVote-1 : newVote+1})
     .then(() =>{
       return res.status(200).json({message:"Voted successfully"});
     }).catch(err => {return res.status(500).json({error:"Internal error occured! Try again"})});
@@ -90,10 +92,12 @@ const upVote = async (req,res) =>{
 
 const downVote = async (req,res) =>{
   let answerId=req.body.answerId;
-  let answerTodownvote=await AnswerSchema.findOne({_id:answerId});
-  let newVote=answerTodownvote.downVotes+1;
+  let isReduce=req.body.isReduce;
 
-  AnswerSchema.findOneAndUpdate({_id:answerId},{downVotes:newVote})
+  let answerTodownvote=await AnswerSchema.findOne({_id:answerId});
+  let newVote=answerTodownvote.downVotes;
+
+  AnswerSchema.findOneAndUpdate({_id:answerId},{downVotes:isReduce ? newVote-1 : newVote+1})
   .then(() =>{
     return res.status(200).json({message:"Down voted successfully"});
   }).catch(err => {return res.status(500).json({error:"Internal error occured! Try again"})});
