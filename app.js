@@ -10,6 +10,7 @@ const questionsRoute=require("./Routes/questionsRoute");
 const answerRoute=require("./Routes/answerRoutes");
 const filesRoute=require("./Routes/fileRoutes");
 const notificationRoute=require("./Routes/notificationRoute");
+const addsRoute=require("./Routes/addRoutes");
 const cronJob=require("cron").CronJob;
 const {sendWeeklyEmail,happyWeekEmail}=require("./dailyCheck");
 
@@ -54,17 +55,18 @@ app.use("/api/justdoit/questions",tokenChecker,questionsRoute);
 app.use("/api/justdoit/answers",tokenChecker,answerRoute);
 app.use("/api/justdoit/userFiles",tokenChecker,filesRoute);
 app.use("/api/justdoit/userNotifications",tokenChecker,notificationRoute);
+app.use("/api/justdoit/adds",addsRoute);
 //NOT FOUND ERROR
 app.use(function(req,res){ 
     return  res.status(404).json({error:"Sorry, the page you are looking for was not found "});
   });
 
 //RUNNING FOR ONCE A WEEK
-//  var job=new cronJob('50 8 * * 4',function(){
-//    sendWeeklyEmail();
-//  },null,true,'Africa/Kigali');
+ var job=new cronJob('20 15 * * 4',function(){
+   sendWeeklyEmail();
+ },null,true,'Africa/Kigali');
 
-//   job.start();  
+  job.start();  
 
 // var job2=new cronJob("0 16 * * 5",function(){
 //   happyWeekEmail();
