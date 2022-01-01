@@ -62,8 +62,9 @@ app.use(function(req,res){
   });
 
 //RUNNING FOR ONCE A WEEK
- var job=new cronJob('20 15 * * 4',function(){
-   sendWeeklyEmail();
+ var job=new cronJob('24 11 * * 6',function(){
+   
+    sendWeeklyEmail();
  },null,true,'Africa/Kigali');
 
   job.start();  

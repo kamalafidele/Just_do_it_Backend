@@ -79,7 +79,7 @@ const getQuestionAnswers=async (req,res) =>{
 }
 
 const upVote = async (req,res) =>{
-    let {answerId,isReduce}=req.body.answerId;
+    let {answerId,isReduce}=req.body;
     
    try{
     let answerToUpvote=await AnswerSchema.findOne({_id:answerId});
