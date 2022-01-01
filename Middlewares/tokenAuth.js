@@ -7,24 +7,18 @@ const checker= async (req, res, next) =>{
     if(token){
         jwt.verify(token,process.env.JWT_SECRET, async(err,decoded) =>{
             if(err){
-                res.status(400).json({error:"Token expired "});
-                res.locals.user=null;
-                return
+                return res.status(400).json({error:"Token expired "});
             }else{
                 const user=await User.findById({_id:decoded._id});
-                if(!user){
-                      res.status(400).send({error:"Not authorized"});
-                      res.locals.user=null;
-                      return;
+             if(!user){
+                    return res.status(400).send({error:"Not authorized"});
                 }
                 req.user=user;
                 next();
             }
         })
     }else{
-        res.status(400).json({error:"NO TOKEN SENT "});
-        res.locals.user=null;
-        return;
+        return  res.status(400).json({error:"NO TOKEN SENT "});
     }
 
 }
