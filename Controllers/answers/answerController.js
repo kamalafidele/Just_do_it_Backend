@@ -56,13 +56,14 @@ const addAnswer= async (req,res) =>{
 }
 
 const getAllAnswers= async (req,res) =>{
-
+ try{
   let answers= await AnswerSchema.find().populate([{path:"question",select:"name"},
   {path:"answeredBy",select:"username avatar"}]);
-  answers[0]["nameMe"]="Kamara";
-  console.log(answers[0]);
-
   return res.status(200).json({answers});
+
+ }catch(err){
+  return res.status(500).json({error:"Internal error occured! Try again"})
+ }
 }
 
 const getQuestionAnswers=async (req,res) =>{
@@ -78,29 +79,30 @@ const getQuestionAnswers=async (req,res) =>{
 }
 
 const upVote = async (req,res) =>{
-    let answerId=req.body.answerId;
-    let isReduce=req.body.isReduce;
-
+    let {answerId,isReduce}=req.body.answerId;
+    
+   try{
     let answerToUpvote=await AnswerSchema.findOne({_id:answerId});
     let newVote=answerToUpvote.upVotes;
+    await AnswerSchema.findOneAndUpdate({_id:answerId},{upVotes: isReduce ? newVote-1 : newVote+1});
 
-    AnswerSchema.findOneAndUpdate({_id:answerId},{upVotes: isReduce ? newVote-1 : newVote+1})
-    .then(() =>{
-      return res.status(200).json({message:"Voted successfully"});
-    }).catch(err => {return res.status(500).json({error:"Internal error occured! Try again"})});
+    return res.status(200).json({message:"Voted successfully"});
+   }catch(err){
+    return res.status(500).json({error:"Internal error occured! Try again"})
+   }
 }
 
 const downVote = async (req,res) =>{
-  let answerId=req.body.answerId;
-  let isReduce=req.body.isReduce;
+  let {answerId,isReduce}=req.body;
+  try{
+    let answerTodownvote=await AnswerSchema.findOne({_id:answerId});
+    let newVote=answerTodownvote.downVotes;
+   await  AnswerSchema.findOneAndUpdate({_id:answerId},{downVotes:isReduce ? newVote-1 : newVote+1})
 
-  let answerTodownvote=await AnswerSchema.findOne({_id:answerId});
-  let newVote=answerTodownvote.downVotes;
-
-  AnswerSchema.findOneAndUpdate({_id:answerId},{downVotes:isReduce ? newVote-1 : newVote+1})
-  .then(() =>{
-    return res.status(200).json({message:"Down voted successfully"});
-  }).catch(err => {return res.status(500).json({error:"Internal error occured! Try again"})});
+   return res.status(200).json({message:"Down voted successfully"});
+  }catch(err){
+    return res.status(500).json({error:"Internal error occured! Try again"})
+  }
 }
 
 module.exports={addAnswer,getQuestionAnswers,upVote,downVote,getAllAnswers};

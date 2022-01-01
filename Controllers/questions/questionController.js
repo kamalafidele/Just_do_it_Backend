@@ -13,7 +13,7 @@ const addQuestion= async (req,res) =>{
   let {topic,question}=req.body;
   let user=req.user;
 
-  if(question.includes("H") || question.includes("T")){
+  if(question.toUpperCase().includes("HUTU") || question.toUpperCase().includes("TUTSI")){
       return res.status(400).json({error:"An invalid question"});
   }else{
     const createdQuestion=new QuestionSchema({question:question,topic:topic,askedBy:user._id})
