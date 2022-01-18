@@ -1,13 +1,5 @@
 const QuestionSchema=require("../../Models/QuestionSchema");
-const cloudinary=require("cloudinary");
 const AnswerSchema=require("../../Models/AnswerSchema");
-
-cloudinary.config({ 
-    cloud_name: 'justdoit', 
-    api_key: '959232878426886', 
-    api_secret: 'HdJRQW9QHzNrM7R9LX5dFELCBig' 
-  });
-
 
 const addQuestion= async (req,res) =>{
   let {topic,question}=req.body;
@@ -27,12 +19,8 @@ const addQuestion= async (req,res) =>{
 const getAllQuestions= async (req,res) =>{
    
   try{
-    let questions= await QuestionSchema.find().populate([{path:"topic",select:"name picture"},
+    let questions= await QuestionSchema.find().sort({createdAt:"desc"}).populate([{path:"topic",select:"name picture"},
     {path:"askedBy",select:"username avatar isPro"},{path:"answertoshow"}]);
-
-    for(let i=0; i<questions.length; i++){
-      questions.sort((a,b) => {return b.createdAt - a.createdAt});
-    }
 
     return res.status(200).json({questions});
 
@@ -45,13 +33,9 @@ const getAllQuestions= async (req,res) =>{
 const getTopicQuestions=async (req,res) =>{
      let workspaceId=req.params.workspaceId;
     try{
-      let topicQuestions= await QuestionSchema.find({topic:workspaceId}).populate([{path:"topic",select:"name picture"},
+      let topicQuestions= await QuestionSchema.find({topic:workspaceId}).sort({createdAt:"desc"}).populate([{path:"topic",select:"name picture"},
       {path:"askedBy",select:"username avatar isPro"},{path:"answertoshow"}]);
   
-      for(let i=0; i<topicQuestions.length; i++){
-        topicQuestions.sort((a,b) => {return b.createdAt - a.createdAt});
-      }
-       
       return res.status(200).json({topicQuestions});
     } catch(err){
       return res.status(500).json({error:"Internal server error occured! Try again "})
