@@ -4,9 +4,9 @@ const cloudinary = require('cloudinary');
 const NotificationSchema=require("../../Models/Notifications");
 
 cloudinary.config({ 
-  cloud_name: 'justdoit', 
-  api_key: '959232878426886', 
-  api_secret: 'HdJRQW9QHzNrM7R9LX5dFELCBig' 
+  cloud_name: process.env.CLOUDINARY_NAME, 
+  api_key: process.env.CLOUDINARY_API_KEY, 
+  api_secret: process.env.CLOUDINARY_API_SECRET 
 });
 
 const uploadProfilePicture = async (req,res) =>{
