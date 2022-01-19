@@ -4,17 +4,18 @@ const QuestionSchema = require("./Models/QuestionSchema");
 
 const sendWeeklyEmail= async () =>{
    try{
-    let questions=await QuestionSchema.find().populate([{path:"answertoshow"},{path:"askedBy"}]);  
+    let questions=await QuestionSchema.find().populate([{path:"answertoshow"},{path:"askedBy"}]).sort({createdAt:"desc"});  
     let users=await User.find();  
     //let currentDate=new Date().getDate();
 
     //let todayQuestions=questions.filter(q => new Date(q.createdAt).getDate() == currentDate);
-     let weekQuestions=questions.filter(q => isThisWeek(new Date(q.createdAt)));
+    //  let weekQuestions=questions.filter(q => isThisWeek(new Date(q.createdAt)));
 
-     for(let j=0; j<weekQuestions.length; j++){
-         weekQuestions.sort((a,b) => { return b.createdAt - a.createdAt });
-     }
-    
+    //  for(let j=0; j<weekQuestions.length; j++){
+    //      weekQuestions.sort((a,b) => { return b.createdAt - a.createdAt });
+    //  }
+    let weekQuestions=questions;
+   
 
    if(weekQuestions.length > 0){
     for(let i=0; i<users.length; i++){

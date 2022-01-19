@@ -13,13 +13,11 @@ const notificationRoute=require("./Routes/notificationRoute");
 const addsRoute=require("./Routes/addRoutes");
 const cronJob=require("cron").CronJob;
 const {sendWeeklyEmail,happyWeekEmail}=require("./dailyCheck");
-
+dotenv.config();
 
 //Database connection
-//mongodb+srv://fidele:123@cluster0.n9af1.mongodb.net/justdoitrw?retryWrites=true&w=majority
-//mongodb://localhost:27017/Justdoit
-const URL="mongodb+srv://fidele:123@cluster0.n9af1.mongodb.net/justdoitrw?retryWrites=true&w=majority";
-mongoose.connect(URL, {useNewUrlParser:true, useUnifiedTopology:true})
+
+mongoose.connect(process.env.DB_URL, {useNewUrlParser:true, useUnifiedTopology:true})
 .then( _=>{
     console.log("APP CONNECTED ON DB");
 }).catch(err =>{console.log("Connecting to db errors: ",err)});
@@ -37,7 +35,6 @@ var corsOptions = {
     optionsSuccessStatus: 200 
   }
 
-dotenv.config();
 app.use(express.json({limit:'5mb'}));
 app.use(express.urlencoded({limit:'3mb',extended:true}));
 app.use(cors(corsOptions));
@@ -62,11 +59,11 @@ app.use(function(req,res){
   });
 
 //RUNNING FOR ONCE A WEEK
-//var job=new cronJob('10 11 * * 6',function(){
- //  sendWeeklyEmail();
- //},null,true,'Africa/Kigali');
+// var job=new cronJob('17 19 * * 3',function(){
+//   sendWeeklyEmail();
+//  },null,true,'Africa/Kigali');
 
- // job.start();  
+//  job.start();  
 
  //var job2=new cronJob("19 12 * * 5",function(){
  //  happyWeekEmail();
