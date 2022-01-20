@@ -20,7 +20,7 @@ const sendWeeklyEmail= async () =>{
    if(weekQuestions.length > 0){
     for(let i=0; i<users.length; i++){
         await emailTransporter.sendMail({
-            from:"<justdoit-rw@justdoit-rw.tech>",
+            from:`<${process.env.NET_CORE_EMAIL}>`,
             to:users[i].email,
             subject:weekQuestions[0].question,
             html:`
@@ -96,7 +96,7 @@ const happyWeekEmail = async () =>{
 
     for(let i=0; i<users.length; i++){
         await emailTransporter.sendMail({
-            from:"<justdoit-rw@justdoit-rw.tech>",
+            from:`<${process.env.NET_CORE_EMAIL}>`,
             to:users[i].email,
             subject:"JDI Happy and Merry Christmas",
             html:`

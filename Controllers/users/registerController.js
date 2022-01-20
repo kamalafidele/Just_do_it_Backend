@@ -47,7 +47,7 @@ if(email.includes("testing") || email.includes("user")){
         .then( () => {
                
                transporter.sendMail({
-                      from:`<${process.env.MAIL_GUN_EMAIL}>`,
+                      from:`<${process.env.NET_CORE_EMAIL}>`,
                       to:email,
                       subject:"Please confirm your account ",
                       html:`
