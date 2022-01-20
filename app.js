@@ -59,11 +59,11 @@ app.use(function(req,res){
   });
 
 //RUNNING FOR ONCE A WEEK
-var job=new cronJob('18 22 * * 4',function(){
-  sendWeeklyEmail();
- },null,true,'Africa/Kigali');
+//var job=new cronJob('18 22 * * 4',function(){
+ // sendWeeklyEmail();
+ //},null,true,'Africa/Kigali');
 
- job.start();  
+ //job.start();  
 
  //var job2=new cronJob("19 12 * * 5",function(){
  //  happyWeekEmail();
