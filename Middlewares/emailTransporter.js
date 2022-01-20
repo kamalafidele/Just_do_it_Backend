@@ -6,6 +6,9 @@ const transport=nodeMailer.createTransport({
     auth:{     
            user:process.env.NET_CORE_USER,
            pass:process.env.NET_CORE_PASS
+    },
+    tls:{
+        rejectUnauthorized:false
     }
 });
 
