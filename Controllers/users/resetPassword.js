@@ -25,7 +25,7 @@ return res.status(400).json({error:validateResult.error.details[0].message});
     await reset.save()
     .then(async ()=>{
      await   transporter.sendMail({
-            from:`<${process.env.MAIL_GUN_EMAIL}>`,
+            from:`<${process.env.NET_CORE_EMAIL}>`,
             to:email,
             subject:"Reset your JDI Account password ",
             html:`
