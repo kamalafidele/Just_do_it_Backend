@@ -38,7 +38,7 @@ const sendWeeklyEmail= async () =>{
                     </div>
                     <div>
                       <p style="font-size: 20px;">
-                      <a href="https://www.justdoit-rw.tech"><strong>${weekQ.question }</strong></a></p>
+                      <a href="https://www.justdoit-rw.tech/questionAnswers/${weekQ._id}"><strong>${weekQ.question }</strong></a></p>
                     </div>
                     <div>
                         ${weekQ.answertoshow 
