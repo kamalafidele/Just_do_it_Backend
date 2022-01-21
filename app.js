@@ -35,8 +35,8 @@ var corsOptions = {
     optionsSuccessStatus: 200 
   }
 
-app.use(express.json({limit:'5mb'}));
-app.use(express.urlencoded({limit:'3mb',extended:true}));
+app.use(express.json({limit:'7mb'}));
+app.use(express.urlencoded({limit:'5mb',extended:true}));
 app.use(cors(corsOptions));
 
 app.use(logger);
