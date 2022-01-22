@@ -22,6 +22,6 @@ let notificationSchema= new Schema({
         type:Boolean,
         default:false
     }
-})
+}, {timestamps:true})
 
 module.exports=mongoose.model("notification",notificationSchema);
