@@ -17,7 +17,7 @@ const uploadProfilePicture = async (req,res) =>{
       try{
         await   User.findByIdAndUpdate({_id:req.user._id},{username:username});
         let notification=new NotificationSchema({user:user._id,notificationMessage:` You  have changed your profile details successfully.`,
-        video:"", hasVideo:false,image:req.user.avatar });
+        video:"", hasVideo:false,image:req.user.avatar, owner:req.user.username });
 
         await notification.save();
     
@@ -39,7 +39,7 @@ const uploadProfilePicture = async (req,res) =>{
         const update=await   User.findByIdAndUpdate({_id:req.user._id},{avatar:uploadedImage.url,username:username});
         
         let notification=new NotificationSchema({user:user._id,notificationMessage:` You  have changed your profile details successfully.`,
-           video:"",hasVideo:false,image:uploadedImage.url});
+           video:"",hasVideo:false,image:uploadedImage.url, owner:req.user.username});
            
         let hasSaved=await notification.save();
     

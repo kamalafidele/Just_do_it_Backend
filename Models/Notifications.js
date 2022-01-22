@@ -21,6 +21,9 @@ let notificationSchema= new Schema({
     isRead:{
         type:Boolean,
         default:false
+    },
+    owner:{
+        type:String
     }
 }, {timestamps:true})
 
