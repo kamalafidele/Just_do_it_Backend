@@ -8,6 +8,19 @@ let notificationSchema= new Schema({
     },
     notificationMessage:{
         type:String
+    },
+    video:{
+        type:String
+    },
+    hasVideo:{
+        type:Boolean
+    },
+    image:{
+        type:String
+    },
+    isRead:{
+        type:Boolean,
+        default:false
     }
 })
 
