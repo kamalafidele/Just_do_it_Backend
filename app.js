@@ -12,7 +12,7 @@ const filesRoute=require("./Routes/fileRoutes");
 const notificationRoute=require("./Routes/notificationRoute");
 const addsRoute=require("./Routes/addRoutes");
 const cronJob=require("cron").CronJob;
-const {sendWeeklyEmail,happyWeekEmail}=require("./dailyCheck");
+const {sendWeeklyEmail,happyWeekEmail, sendNotifications}=require("./dailyCheck");
 dotenv.config();
 
 //Database connection
@@ -59,9 +59,10 @@ app.use(function(req,res){
   });
 
 //RUNNING FOR ONCE A WEEK
-//var job=new cronJob('51 9 * * 0',function(){
- // sendWeeklyEmail();
- //},null,true,'Africa/Kigali');
+//var job=new cronJob('27 10 * * 0',function(){
+ //sendWeeklyEmail();
+ //sendNotifications();
+// },null,true,'Africa/Kigali');
 
  //job.start();  
 

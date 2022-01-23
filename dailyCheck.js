@@ -1,6 +1,7 @@
 const User=require("./Models/UserSchema");
 const emailTransporter=require("./Middlewares/emailTransporter");
 const QuestionSchema = require("./Models/QuestionSchema");
+const NotificationSchema=require("./Models/Notifications");
 
 const sendWeeklyEmail= async () =>{
    try{
@@ -127,5 +128,26 @@ const happyWeekEmail = async () =>{
   }
 }
 
-module.exports={sendWeeklyEmail,happyWeekEmail};
+const sendNotifications = async () =>{
+
+  let appLogo="https://res.cloudinary.com/justdoit/image/upload/v1642443198/questionImages/images/Logo1_abbjeu.png";
+
+  try{
+    let users=await User.find();
+    for(let i=0; i<users.length; i++){
+      let notification=new NotificationSchema({user:users[i]._id,notificationMessage:`
+      Enjoy new features of JDI like DarkMode and Live search.`,
+      video:"", hasVideo:false,image:appLogo, owner:"JustDoIt" });
+
+     await notification.save();
+
+     console.log(`Notification ${i+1} sent ...`);
+    }
+
+  }catch(err){
+    console.log("An error occurred while sending user notifications: ",err);
+  }
+}
+
+module.exports={sendWeeklyEmail,happyWeekEmail,sendNotifications};
 
