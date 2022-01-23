@@ -21,7 +21,7 @@ const sendWeeklyEmail= async () =>{
     //for(let i=0; i<users.length; i++){
         await emailTransporter.sendMail({
             from:`<${process.env.NET_CORE_EMAIL}>`,
-            to:"kamalafizzet45@gmail.com",
+            to:"mbonera31@gmail.com",
             subject:weekQuestions[0].question,
             html:`
               <div>
