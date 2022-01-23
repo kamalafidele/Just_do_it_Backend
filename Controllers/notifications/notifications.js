@@ -4,7 +4,7 @@ const getNotifications = async (req,res) =>{
 
     let id=req.user._id;
 
-   await NotificationSchema.find({user:id})
+   await NotificationSchema.find({user:id}).sort({createdAt:"desc"})
          .then(notifications =>{
              return res.status(200).json({notifications:notifications});
          })
