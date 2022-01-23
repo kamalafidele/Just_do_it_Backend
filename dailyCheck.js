@@ -65,6 +65,7 @@ const sendWeeklyEmail= async () =>{
              </div>           
               `
         });
+
         console.log(`Email ${i} sent.....`);
     } 
 
