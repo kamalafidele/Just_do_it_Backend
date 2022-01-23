@@ -18,15 +18,15 @@ const sendWeeklyEmail= async () =>{
    
 
    if(weekQuestions.length > 0){
-    for(let i=0; i<users.length; i++){
+    //for(let i=0; i<users.length; i++){
         await emailTransporter.sendMail({
             from:`<${process.env.NET_CORE_EMAIL}>`,
-            to:users[i].email,
+            to:"mbonera31@gmail.com",
             subject:weekQuestions[0].question,
             html:`
               <div>
                 <h1 style="text-align: center;">JDI Trending Discussions Feed</h1>
-                <h3>Hello <strong>${users[i].username}</strong></h3>
+                <h3>Hello <strong>${"Mbonera"}</strong></h3>
                 <p style="font-size: 18px;">Your collegues are busy discussing more about different topics.</p> 
                 ${weekQuestions.map((weekQ,index) => `
                   ${index < 3 ? 
@@ -64,8 +64,9 @@ const sendWeeklyEmail= async () =>{
              </div>           
               `
         });
-        console.log(`Email ${i} sent.....`);
-    } 
+      console.log("Email sent");
+       // console.log(`Email ${i} sent.....`);
+    //} 
 
    }
    }catch(err){
