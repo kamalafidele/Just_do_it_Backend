@@ -17,7 +17,7 @@ const uploadProfilePicture = async (req,res) =>{
       try{
         await   User.findByIdAndUpdate({_id:req.user._id},{username:username});
         let notification=new NotificationSchema({user:user._id,notificationMessage:` You  have changed your profile details successfully.`,
-        video:"", hasVideo:false,image:req.user.avatar, owner:req.user.username });
+        video:"", hasVideo:false,image:req.user.avatar, owner:username });
 
         await notification.save();
     
