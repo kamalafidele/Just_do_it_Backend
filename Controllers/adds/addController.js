@@ -42,7 +42,7 @@ const updateAddClicks = async (req,res) =>{
     
     try{
      
-      let update=await AddsSchema.findOneAndUpdate({_id:addId},{$set:{clicks:newClicks}},{new:true});
+      await AddsSchema.findOneAndUpdate({_id:addId},{$set:{clicks:newClicks}},{new:true});
       
       return res.status(200).json({message:"Clicks updated successfully"});
     }catch(err){

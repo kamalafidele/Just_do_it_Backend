@@ -1,5 +1,4 @@
 const UserSchema=require("../../Models/UserSchema");
-const gravatar=require("gravatar");
 const transporter=require("../../Middlewares/emailTransporter");
 const {signupValidator} =require("../../Middlewares/errorValidator");
 
