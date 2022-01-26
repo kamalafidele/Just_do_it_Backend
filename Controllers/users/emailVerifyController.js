@@ -9,7 +9,7 @@ const createToken=(_id) =>{
 const handleEmailVerification=  (req, res, next) =>{
        
        let verificationCode=req.body.verificationCode;
-   if(verificationCode==0 || verificationCode==""){
+   if(verificationCode==""){
        return res.status(400).json({error:"Please enter the code "});
    }else{
 

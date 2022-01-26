@@ -1,4 +1,3 @@
-const router = require('express').Router();
 const User = require("../../Models/UserSchema");
 const cloudinary = require('cloudinary');
 const NotificationSchema=require("../../Models/Notifications");
@@ -36,12 +35,12 @@ const uploadProfilePicture = async (req,res) =>{
                 folder: 'users/images',
                 allowed_formats:['png','jpg','webp','svg','jfif'] });
     
-        const update=await   User.findByIdAndUpdate({_id:req.user._id},{avatar:uploadedImage.url,username:username});
+        await   User.findByIdAndUpdate({_id:req.user._id},{avatar:uploadedImage.url,username:username});
         
         let notification=new NotificationSchema({user:user._id,notificationMessage:` You  have changed your profile details successfully.`,
-           video:"",hasVideo:false,image:uploadedImage.url, owner:req.user.username});
+           video:"",hasVideo:false,image:uploadedImage.url, owner:username});
            
-        let hasSaved=await notification.save();
+        await notification.save();
     
         return  res.status(200).json({message:"Profile details changed successfully",newProfile:uploadedImage.url,newUsername:username});
     
