@@ -58,7 +58,7 @@ const addAnswer= async (req,res) =>{
 const getAllAnswers= async (req,res) =>{
  try{
   let answers= await AnswerSchema.find().populate([{path:"question",select:"name"},
-  {path:"answeredBy",select:"username avatar"}]);
+  {path:"answeredBy",select:"username avatar"}]).populate([{path:"comments"}]);
   return res.status(200).json({answers});
 
  }catch(err){
@@ -70,7 +70,8 @@ const getQuestionAnswers=async (req,res) =>{
      let questionId=req.params.questionId;
      
      try{
-      let questionAnswers= await AnswerSchema.find({question:questionId}).populate([{path:"answeredBy",select:"username avatar isPro"}]);
+      let questionAnswers= await AnswerSchema.find({question:questionId}).populate([{path:"answeredBy",select:"username avatar isPro"},
+     {path:"comments"}]);
       
       return res.status(200).json({questionAnswers});
      }catch(err){

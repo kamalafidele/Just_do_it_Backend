@@ -1,26 +1,32 @@
+//  THIRD PARTY PACKAGES 
 const express=require("express");
 const app=express();
 const cors=require("cors");
 const dotenv=require("dotenv");
 const mongoose=require("mongoose");
+const cronJob=require("cron").CronJob;
+
+// ROUTES 
 const userRoutes=require("./Routes/userRoutes");
 const workspaceRoutes=require("./Routes/workspaceRoute");
-const tokenChecker=require("./Middlewares/tokenAuth");
 const questionsRoute=require("./Routes/questionsRoute");
 const answerRoute=require("./Routes/answerRoutes");
 const filesRoute=require("./Routes/fileRoutes");
 const notificationRoute=require("./Routes/notificationRoute");
 const addsRoute=require("./Routes/addRoutes");
-const cronJob=require("cron").CronJob;
+const commentRoutes=require("./Routes/commentRoutes");
+
+//  MIDDLEWARES
 const {sendWeeklyEmail,happyWeekEmail, sendNotifications}=require("./dailyCheck");
+const tokenChecker=require("./Middlewares/tokenAuth");
 dotenv.config();
 
 //Database connection
-
 mongoose.connect(process.env.DB_URL, {useNewUrlParser:true, useUnifiedTopology:true})
 .then( _=>{
     console.log("APP CONNECTED ON DB");
 }).catch(err =>{console.log("Connecting to db errors: ",err)});
+
 
 
 //Middlewares
@@ -52,6 +58,7 @@ app.use("/api/justdoit/questions",tokenChecker,questionsRoute);
 app.use("/api/justdoit/answers",tokenChecker,answerRoute);
 app.use("/api/justdoit/userFiles",tokenChecker,filesRoute);
 app.use("/api/justdoit/userNotifications",tokenChecker,notificationRoute);
+app.use("/api/justdoit/answerComments",tokenChecker,commentRoutes);
 app.use("/api/justdoit/adds",addsRoute);
 //NOT FOUND ERROR
 app.use(function(req,res){ 
@@ -59,12 +66,12 @@ app.use(function(req,res){
   });
 
 //RUNNING FOR ONCE A WEEK
-//var job=new cronJob('17 20 * * 0',function(){
- //sendWeeklyEmail();
- //sendNotifications();
- //},null,true,'Africa/Kigali');
+// var job=new cronJob('14 7 * * 5',function(){
+//  sendWeeklyEmail();
+//  sendNotifications();
+//  },null,true,'Africa/Kigali');
 
- //job.start();  
+//  job.start();  
 
  //var job2=new cronJob("19 12 * * 5",function(){
  //  happyWeekEmail();
