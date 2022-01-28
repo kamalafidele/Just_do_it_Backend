@@ -44,7 +44,8 @@ const handleLogin= async function(req, res, next){
                                    email:user.email,
                                    profile:user.avatar,
                                    isPro:user.isPro,
-                                   darkMode:user.darkMode
+                                   darkMode:user.darkMode,
+                                   session:user._id
                               }});
                   })
                   
