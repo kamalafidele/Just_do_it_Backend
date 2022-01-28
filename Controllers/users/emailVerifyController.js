@@ -32,7 +32,8 @@ const handleEmailVerification=  (req, res, next) =>{
                                      username:user.username,
                                      email:user.email,
                                      profile:user.avatar,
-                                     isPro:user.isPro
+                                     isPro:user.isPro,
+                                     session:user._id
                               }});
                      })
    

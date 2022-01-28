@@ -5,14 +5,17 @@ const addQuestion= async (req,res) =>{
   let {topic,question}=req.body;
   let user=req.user;
 
-  if(question.toUpperCase().includes("HUTU") || question.toUpperCase().includes("TUTSI")){
-      return res.status(400).json({error:"An invalid question"});
-  }else{
-    const createdQuestion=new QuestionSchema({question:question,topic:topic,askedBy:user._id})
-    createdQuestion.save()
-    .then(() => { return res.status(200).json({message:"Question added successfully."})})
-    .catch(err => {console.log("Adding question ERR: ",err); return res.status(500).json({message:"Internal server error occured! Try again "})});
-  
+  if(question.toUpperCase().includes("HUTU") || question.toUpperCase().includes("TUTSI"))
+    return res.status(400).json({error:"An invalid question"});
+
+  try{
+    const createdQuestion=new QuestionSchema({question:question,topic:topic,askedBy:user._id});
+     await  createdQuestion.save();
+     let questionToSend=await QuestionSchema.findById({_id:createdQuestion._id}).populate([{path:"askedBy"},{path:"topic"}]);
+
+     return res.status(200).json({message:"Question added successfully.",addedQuestion:questionToSend});
+  }catch(err){ 
+    return res.status(500).json({message:"Internal server error occured! Try again "})
   }
 }
 
@@ -20,7 +23,7 @@ const getAllQuestions= async (req,res) =>{
    
   try{
     let questions= await QuestionSchema.find().sort({createdAt:"desc"}).populate([{path:"topic",select:"name picture"},
-    {path:"askedBy",select:"username avatar isPro"},{path:"answertoshow",populate:[{path:"comments"}]}]);
+    {path:"askedBy"},{path:"answertoshow",populate:[{path:"comments"}]}]);
 
     return res.status(200).json({questions});
 
