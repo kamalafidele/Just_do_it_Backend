@@ -20,7 +20,7 @@ const getAllQuestions= async (req,res) =>{
    
   try{
     let questions= await QuestionSchema.find().sort({createdAt:"desc"}).populate([{path:"topic",select:"name picture"},
-    {path:"askedBy",select:"username avatar isPro"},{path:"answertoshow"}]);
+    {path:"askedBy",select:"username avatar isPro"},{path:"answertoshow",populate:[{path:"comments"}]}]);
 
     return res.status(200).json({questions});
 
@@ -34,7 +34,7 @@ const getTopicQuestions=async (req,res) =>{
      let workspaceId=req.params.workspaceId;
     try{
       let topicQuestions= await QuestionSchema.find({topic:workspaceId}).sort({createdAt:"desc"}).populate([{path:"topic",select:"name picture"},
-      {path:"askedBy",select:"username avatar isPro"},{path:"answertoshow"}]);
+      {path:"askedBy",select:"username avatar isPro"},{path:"answertoshow",populate:[{path:"comments"}]}]);
   
       return res.status(200).json({topicQuestions});
     } catch(err){

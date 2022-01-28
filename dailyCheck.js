@@ -2,6 +2,7 @@ const User=require("./Models/UserSchema");
 const emailTransporter=require("./Middlewares/emailTransporter");
 const QuestionSchema = require("./Models/QuestionSchema");
 const NotificationSchema=require("./Models/Notifications");
+const AnswerSchema=require("./Models/AnswerSchema");
 
 const sendWeeklyEmail= async () =>{
    try{
@@ -149,5 +150,15 @@ const sendNotifications = async () =>{
   }
 }
 
-module.exports={sendWeeklyEmail,happyWeekEmail,sendNotifications};
+async function update(){
+  try{
+     await AnswerSchema.updateMany({$set:{showComments:false}});
+   await AnswerSchema.updateMany({$set:{comments:[]}});
+
+  }catch(err){
+    console.log("UPDATING ANSWERS SCHEMA FAILED: ",err);
+  }
+}
+
+module.exports={sendWeeklyEmail,happyWeekEmail,sendNotifications,update};
 

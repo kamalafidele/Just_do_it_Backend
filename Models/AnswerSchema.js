@@ -11,6 +11,17 @@ const AnswerSchema=new Schema({
         type:Schema.Types.ObjectId,
         ref:"users"
     },
+    comments:[
+        {
+            type:Schema.Types.ObjectId,
+            ref:"comments",
+            default:null
+        }
+    ],
+    showComments:{
+        type:Boolean,
+        default:false
+    },
     upVotes:{
         type:Number,
         default:0
