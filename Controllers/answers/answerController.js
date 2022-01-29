@@ -23,36 +23,35 @@ async function upload(imagesNum,imagedata){
 const addAnswer= async (req,res) =>{
     let {answer,question,images}=req.body;
     let user=req.user;
-
     let imagesNumber=images.length;
      
-    if(imagesNumber == 0){
-      const createdAnswer=new AnswerSchema({answer:answer,question:question,answeredBy:user._id})
-      
-      createdAnswer.save()
-      .then(() => { 
-    
-         QuestionSchema.findOneAndUpdate({_id:question},{answertoshow:createdAnswer._id})
-         .then(() =>{
-            return res.status(200).json({message:"Answer added successfully."})
-         })
-        })
-      .catch(err => {return res.status(500).json({message:"Internal error occured! Try again "})});
-    }
-    else if(imagesNumber >0){
-         urls= await upload(imagesNumber,images);
+    try{
 
-         const createdAnswer=new AnswerSchema({answer:answer,question:question,answeredBy:user._id,
-            images: imagesNumber == 2 ? [ urls[0],urls[1] ]:[ urls[0] ] });
-          
-            createdAnswer.save()
-            .then(() => { 
-              QuestionSchema.findOneAndUpdate({_id:question},{answertoshow:createdAnswer._id})
-              .then(() =>{
-                return res.status(200).json({message:"Answer added successfully."})})
-              })
-            .catch(err => {return res.status(500).json({message:"Internal error occured! Try again "})});
+      if(imagesNumber == 0){
+        const createdAnswer=new AnswerSchema({answer:answer,question:question,answeredBy:user._id})
+        
+        await createdAnswer.save();
+        await QuestionSchema.findOneAndUpdate({_id:question},{answertoshow:createdAnswer._id})
+      }
+      else if(imagesNumber >0){
+        urls= await upload(imagesNumber,images);
+
+        const createdAnswer=new AnswerSchema({answer:answer,question:question,answeredBy:user._id,
+           images: imagesNumber == 2 ? [ urls[0],urls[1] ]:[ urls[0] ] });
+         
+           await createdAnswer.save();
+           await QuestionSchema.findOneAndUpdate({_id:question},{answertoshow:createdAnswer._id});
+   }
+
+   let questionsToSend=await QuestionSchema.find().sort({createdAt:"desc"}).populate([{path:"topic",select:"name picture"},
+   {path:"askedBy"},{path:"answertoshow",populate:[{path:"comments"}]}]);
+   
+   return res.status(200).json({message:"Answer added successfully.",newAllQuestions:questionsToSend});
+
+    }catch(err){
+      return res.status(500).json({message:"Internal error occured! Try again "})
     }
+
 }
 
 const getAllAnswers= async (req,res) =>{
