@@ -2,9 +2,9 @@
 const express=require("express");
 const app=express();
 const cors=require("cors");
-const dotenv=require("dotenv");
 const mongoose=require("mongoose");
 const cronJob=require("cron").CronJob;
+require("dotenv").config();
 
 // ROUTES 
 const userRoutes=require("./Routes/userRoutes");
@@ -19,7 +19,6 @@ const commentRoutes=require("./Routes/commentRoutes");
 //  MIDDLEWARES
 const {sendWeeklyEmail,happyWeekEmail, sendNotifications}=require("./dailyCheck");
 const tokenChecker=require("./Middlewares/tokenAuth");
-dotenv.config();
 
 //Database connection
 mongoose.connect(process.env.DB_URL, {useNewUrlParser:true, useUnifiedTopology:true})
@@ -66,18 +65,18 @@ app.use(function(req,res){
   });
 
 //RUNNING FOR ONCE A WEEK
- //var job=new cronJob('3 7 * * 1',function(){
-  //sendWeeklyEmail();
+ var job=new cronJob('30 12 * * 3',function(){
+  sendWeeklyEmail();
   //sendNotifications();
- // },null,true,'Africa/Kigali');
+ },null,true,'Africa/Kigali');
 
-  //job.start();  
+  job.start();  
 
- //var job2=new cronJob("19 12 * * 5",function(){
- //  happyWeekEmail();
- // },null,true,'Africa/Kigali');
+ var job2=new cronJob("30 18 * * 5",function(){
+  happyWeekEmail();
+ },null,true,'Africa/Kigali');
  
- //job2.start();
+ job2.start();
 
 //LISTENING TO THE PORT
 

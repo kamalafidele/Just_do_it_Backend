@@ -8,15 +8,15 @@ const sendWeeklyEmail= async () =>{
    try{
     let questions=await QuestionSchema.find().populate([{path:"answertoshow"},{path:"askedBy"}]).sort({createdAt:"desc"});  
     let users=await User.find();  
+    
     //let currentDate=new Date().getDate();
-
-    //let todayQuestions=questions.filter(q => new Date(q.createdAt).getDate() == currentDate);
-    //  let weekQuestions=questions.filter(q => isThisWeek(new Date(q.createdAt)));
-
     //  for(let j=0; j<weekQuestions.length; j++){
     //      weekQuestions.sort((a,b) => { return b.createdAt - a.createdAt });
     //  }
-    let weekQuestions=questions;
+    //let weekQuestions=questions;
+    //let todayQuestions=questions.filter(q => new Date(q.createdAt).getDate() == currentDate);
+     let weekQuestions=questions.filter(q => isThisWeek(new Date(q.createdAt)));
+
    
 
    if(weekQuestions.length > 0){
