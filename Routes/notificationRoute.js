@@ -1,11 +1,11 @@
-const router=require("express").Router();
-const User=require("../Models/UserSchema");
+const router = require("express").Router();
+const User = require("../Models/UserSchema");
 
-const {getNotifications,deleteNotification} = require("../Controllers/notifications/notifications");
+const { getNotifications, deleteNotification } = require("../Controllers/notifications/notifications");
 
 const updateUserMode = async (req,res) =>{
-    let user=req.user;
-    let modeStatus=req.params.modeStatus;
+    let user = req.user;
+    let modeStatus = req.params.modeStatus;
 
     try{
         await User.findOneAndUpdate({_id:user._id},{$set:{darkMode: modeStatus == "true" ?  true : false }},{new:true});
@@ -22,4 +22,4 @@ router.get("/notifications",getNotifications);
 router.delete("/:id",deleteNotification);
 router.post("/userMode/:modeStatus",updateUserMode);
 
-module.exports=router;
+module.exports = router;

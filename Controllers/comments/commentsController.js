@@ -1,10 +1,10 @@
-const Comment=require("../../Models/CommentSchema");
-const Answer=require("../../Models/AnswerSchema");
+const Comment = require("../../Models/CommentSchema");
+const Answer = require("../../Models/AnswerSchema");
 
-const getAnswerComments= async (req,res) =>{
-   let answerId=req.body.answerId;
+const getAnswerComments = async (req,res) =>{
+   let answerId = req.body.answerId;
    try{
-     let answerComments=await Comment.find({answerId:answerId}).populate({path:"commentedBy",select:"_id username avatar isPro"});
+     let answerComments = await Comment.find({ answerId: answerId }).populate({path:"commentedBy",select:"_id username avatar isPro"});
      return res.status(200).json({answerComments});
 
    }catch(err){
@@ -12,24 +12,25 @@ const getAnswerComments= async (req,res) =>{
    }
 }
 
-const addComment = async (req,res) =>{
- let {answerId,comment}=req.body;
+const addComment = async (req,res) => {
+ let { answerId, comment } = req.body;
+
  if(!answerId || comment == "")
    return res.status(400).json({error:"Please fill provide all details"});
 
  try{
-   let {comments}=await Answer.findById({_id:answerId});
+   let { comments } = await Answer.findById({_id:answerId});
    
-   let newComment=new Comment({commentedBy:req.user._id,answerId:answerId,comment:comment});
+   let newComment = new Comment({commentedBy:req.user._id,answerId:answerId,comment:comment});
 
-   let save=await newComment.save();
+   let save = await newComment.save();
    comments.push(save._id);
      
-   await Answer.findByIdAndUpdate({_id:answerId},{comments:comments});
+   await Answer.findByIdAndUpdate({_id:answerId},{ comments: comments});
 
-   let commentToSend=await Comment.findById({_id:save._id}).populate({path:"commentedBy",select:"username avatar isPro"});
+   let commentToSend = await Comment.findById({_id:vsave._id}).populate({ path: "commentedBy",select: "username avatar isPro"});
    
-   return res.status(200).json({message:"Comment added successfully",addedComment:commentToSend});   
+   return res.status(200).json({message:"Comment added successfully", addedComment: commentToSend});   
 
  }catch(err){
      console.log("Adding comment Error: ",err);

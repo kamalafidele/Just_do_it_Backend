@@ -1,20 +1,20 @@
-const mongoose=require("mongoose");
-const Schema=mongoose.Schema;
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-const WorkspaceSchema=new Schema({
-  name:{
-      type:String
+const WorkspaceSchema = new Schema({
+  name: {
+      type: String
   },
-  description:{
-      type:String
+  description: {
+      type: String
   },
-  picture:{
-      type:String
+  picture: {
+      type: String
   },
-  creator:{
-      type:Schema.Types.ObjectId,
-      ref:"users"
+  creator: {
+      type: Schema.Types.ObjectId,
+      ref: "users"
   }
 });
 
-module.exports=mongoose.model("workspaces",WorkspaceSchema);
+module.exports = mongoose.model("workspaces", WorkspaceSchema);

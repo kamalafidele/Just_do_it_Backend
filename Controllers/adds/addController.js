@@ -1,34 +1,34 @@
-const AddsSchema=require("../../Models/AddsSchema");
+const AddsSchema = require("../../Models/AddsSchema");
 
-const getAllAdds=async (req,res) =>{
+const getAllAdds = async (req,res) => {
     try{
-     let adds=await AddsSchema.find();
+     let adds = await AddsSchema.find();
      return res.status(200).json({adds});
 
     }catch(err){
-        return res.status(500).json({error:err});
+        return res.status(500).json({ error: err});
     }
 }
 
-const getSingleAdd = async (req,res) =>{
+const getSingleAdd = async (req,res) => {
     try{
-      let addId=req.params.addId;
-      let add=await AddsSchema.findById({_id:addId});
-      return res.status(200).json({add});
+      let { addId } = req.params;
+      let add = await AddsSchema.findById({_id: addId});
+      return res.status(200).json({ add });
 
     }catch(err){
-        return res.status(500).json({error:err});
+        return res.status(500).json({error: err});
     }
 }
 
 async function addAdd (req,res){
-    const {name,addLightImage,addDarkImage,addLink}=req.body;
+    const {name, addLightImage, addDarkImage, addLink} = req.body;
 
     if(!name || name == "" || !addLightImage || !addDarkImage || !addLink)
       return res.status(200).json({error:"Please provide all add details"});
 
     try{
-    let add=new AddsSchema({name:name,addLightImage:addLightImage,addDarkImage:addDarkImage,addLink:addLink,clicks:0});
+    let add = new AddsSchema({name: name,addLightImage: addLightImage,addDarkImage: addDarkImage,addLink: addLink, clicks:0});
     await add.save();
     return res.status(200).json({message:"Add added successfully"});
 
@@ -37,8 +37,8 @@ async function addAdd (req,res){
     }
 }
 
-const updateAddClicks = async (req,res) =>{
-    let {addId,newClicks}=req.body;
+const updateAddClicks = async (req,res) => {
+    let {addId, newClicks } = req.body;
     
     try{
      
@@ -50,4 +50,4 @@ const updateAddClicks = async (req,res) =>{
     }
 }
 
-module.exports={getAllAdds, getSingleAdd,addAdd, updateAddClicks};
+module.exports = { getAllAdds, getSingleAdd, addAdd, updateAddClicks };

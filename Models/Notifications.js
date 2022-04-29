@@ -1,30 +1,30 @@
-const mongoose=require("mongoose");
-const Schema=mongoose.Schema;
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-let notificationSchema= new Schema({
-    user:{
-        type:Schema.Types.ObjectId,
-        ref:"users"
+let notificationSchema = new Schema({
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: "users"
     },
-    notificationMessage:{
-        type:String
+    notificationMessage: {
+        type: String
     },
-    video:{
-        type:String
+    video: {
+        type: String
     },
-    hasVideo:{
-        type:Boolean
+    hasVideo: {
+        type: Boolean
     },
-    image:{
-        type:String
+    image: {
+        type: String
     },
-    isRead:{
-        type:Boolean,
-        default:false
+    isRead: {
+        type: Boolean,
+        default: false
     },
-    owner:{
-        type:String
+    owner: {
+        type: String
     }
 }, {timestamps:true})
 
-module.exports=mongoose.model("notification",notificationSchema);
+module.exports = mongoose.model("notification",notificationSchema);

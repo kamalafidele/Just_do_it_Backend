@@ -1,19 +1,19 @@
-const User=require("../../Models/UserSchema");
-const transporter=require("../../Middlewares/emailTransporter");
-const ResetSchema=require("../../Models/ResetPasswordSchema");
-const {emailValidator}=require("../../Middlewares/errorValidator");
+const User = require("../../Models/UserSchema");
+const transporter = require("../../Middlewares/emailTransporter");
+const ResetSchema = require("../../Models/ResetPasswordSchema");
+const { emailValidator } = require("../../Middlewares/errorValidator");
 
-const resetPassword=async (req,res) =>{
-let email=req.body.email;
+const resetPassword = async (req,res) =>{
+let email = req.body.email;
 
 
-const validateResult=emailValidator.validate({email});
+const validateResult = emailValidator.validate({email});
 
 if(validateResult.error){
 return res.status(400).json({error:validateResult.error.details[0].message});
 }else{
 
-    email=email.toLowerCase();
+    email = email.toLowerCase();
     let userExist=await User.findOne({email:email}).exec();
     if(!userExist){
         return res.status(404).json({error:"Sorry that didn't work"});
@@ -23,7 +23,7 @@ return res.status(400).json({error:validateResult.error.details[0].message});
     const reset=new ResetSchema({userId:userExist._id,uniqueNumber:uniqueNumber});
     
     await reset.save()
-    .then(async ()=>{
+    .then(async ()=> {
      await   transporter.sendMail({
             from:`<${process.env.NET_CORE_EMAIL}>`,
             to:email,
@@ -64,11 +64,11 @@ return res.status(400).json({error:validateResult.error.details[0].message});
 
 const resendCode = async (req,res) =>{
 
- let email=req.body.email;
- email=email.toLowerCase();
+ let email = req.body.email;
+ email = email.toLowerCase();
 
- let uniqueNumber=Math.floor(Math.random()*1022052)+"-"+Date.now();
- let userExist= await  User.findOne({email:email,status:"Pending"}).exec();
+ let uniqueNumber = Math.floor(Math.random()*1022052)+"-"+Date.now();
+ let userExist = await  User.findOne({email:email,status:"Pending"}).exec();
 
  if(userExist){
      
@@ -91,10 +91,10 @@ const resendCode = async (req,res) =>{
                 Copyright © 2021 - Mbonera. All Rights and Policies Reserved</p>
                 </div>
                  `
-            }).then(() =>{
+            }).then(() => {
                 return res.status(200).json({message:"Verify your account"});
             })
-            .catch(err =>{
+            .catch(err => {
                 return res.status(400).json({erorr:"Sending an email failed. Try again later!"});
             })
          
@@ -110,4 +110,4 @@ const resendCode = async (req,res) =>{
  }
 }
 
-module.exports={resetPassword,resendCode};
+module.exports = { resetPassword, resendCode };

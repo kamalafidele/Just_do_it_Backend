@@ -1,27 +1,27 @@
-const {Schema,model}=require("mongoose");
+const { Schema, model } = require("mongoose");
 
-const CommentSchema=new Schema({
-    commentedBy:{
-        type:Schema.Types.ObjectId,
-        ref:"users"
+const CommentSchema = new Schema({
+    commentedBy: {
+        type: Schema.Types.ObjectId,
+        ref: "users"
     },
-    answerId:{
-        type:Schema.Types.ObjectId,
-        ref:"answers"
+    answerId: {
+        type: Schema.Types.ObjectId,
+        ref: "answers"
     },
-    comment:{
-        type:String
+    comment: {
+        type: String
     }
 });
 
 CommentSchema.pre("find", function(next){
-    this.populate({path:"commentedBy",select:"username avatar isPro"});
+    this.populate({path:"commentedBy",select: "username avatar isPro"});
     next();
 })
 
 CommentSchema.pre("findById", function(next){
-    this.populate({path:"commentedBy",select:"username avatar isPro"});
+    this.populate({path:"commentedBy", select: "username avatar isPro"});
     next();
 })
 
-module.exports=model("comments",CommentSchema);
+module.exports = model("comments", CommentSchema);
