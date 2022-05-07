@@ -15,20 +15,25 @@ const addQuestion = async (req,res) =>{
 
      return res.status(200).json({ message: "Question added successfully.", addedQuestion: questionToSend });
   }catch(err) { 
-    return res.status(500).json({ message: "Internal server error occured! Try again "})
+    return res.status(500).json({ message: "Internal server error occured! Try again "});
   }
 }
 
 const getAllQuestions= async (req,res) =>{
-   
-  try{
-    let questions = await QuestionSchema.find().sort({createdAt:"desc"}).populate([{path:"topic",select:"name picture"},
-    {path:"askedBy"},{path:"answertoshow",populate:[{path:"comments"}]}]);
+   let questions = [];
 
-    return res.status(200).json({questions});
+  try {
+    if(!req.user.isPro)
+     questions = await QuestionSchema.find({ topic: {$in: req.userWorkspaces }}).sort({createdAt:"desc"})
+     .populate([{path:"topic",select:"name picture"},{path:"askedBy"},{path:"answertoshow",populate:[{path:"comments"}]}]);
+    else 
+     questions = await QuestionSchema.find().sort({createdAt:"desc"})
+     .populate([{path:"topic",select:"name picture"},{path:"askedBy"},{path:"answertoshow",populate:[{path:"comments"}]}]);
+
+    return res.status(200).json({ questions });
 
   }catch(err){
-    return res.status(500).json({error:"Internal server error occured! Try again "})
+    return res.status(500).json({error:"Internal server error occured! Try again "});
   }
 
 }

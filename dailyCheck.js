@@ -142,10 +142,10 @@ const sendNotifications = async () =>{
   let appLogo="https://res.cloudinary.com/justdoit/image/upload/v1642443198/questionImages/images/Logo1_abbjeu.png";
 
   try{
-    let users=await User.find();
-    for(let i=0; i<users.length; i++){
-      let notification=new NotificationSchema({user:users[i]._id,notificationMessage:`
-      Enjoy new features of JDI like DarkMode and Live search.`,
+    let users = await User.find();
+    for(let i = 0; i< users.length; i++){
+      let notification = new NotificationSchema({user: users[i]._id, notificationMessage:`
+      Upgrade your account to ✔🎉Pro🐱‍🏍 so that you can view and comment on discussions from channels that you are not in.`,
       video:"", hasVideo:false,image:appLogo, owner:"JustDoIt" });
 
      await notification.save();

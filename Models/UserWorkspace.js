@@ -15,4 +15,6 @@ const UserWorkspaceSchema = new Schema({
     ]
 });
 
+UserWorkspaceSchema.index({ user: 1});
+
 module.exports = mongoose.model("userWorkspaces", UserWorkspaceSchema);
