@@ -16,6 +16,6 @@ const QuestionSchema = new Schema({
         default: 0
     },
     answertoshow:{ type: Schema.Types.ObjectId,ref: "answers", default: null}
-},{timestamps:true});
+},{ timestamps: true });
 
 module.exports = mongoose.model("questions", QuestionSchema);

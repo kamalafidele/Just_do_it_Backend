@@ -31,6 +31,6 @@ const AnswerSchema = new Schema({
         default: 0
     },
     images:[{ type: String }]
-},{timestamps:true});
+},{ timestamps:true });
 
-module.exports = mongoose.model("answers",AnswerSchema);
+module.exports = mongoose.model("answers", AnswerSchema);

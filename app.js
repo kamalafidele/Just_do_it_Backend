@@ -50,6 +50,7 @@ app.use(function(req, res, next) {
 });
 
 //Routes
+app.get("/", (req,res) => res.sendFile(__dirname + "/views/index.html"));
 app.use("/api/justdoit/users", userRoutes);
 app.use("/api/justdoit/workspaces", tokenChecker, workspaceRoutes);
 app.use("/api/justdoit/questions", tokenChecker, questionsRoute);

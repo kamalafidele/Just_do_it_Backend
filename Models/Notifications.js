@@ -25,6 +25,6 @@ let notificationSchema = new Schema({
     owner: {
         type: String
     }
-}, {timestamps:true})
+}, {timestamps: true})
 
 module.exports = mongoose.model("notification",notificationSchema);

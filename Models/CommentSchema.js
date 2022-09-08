@@ -15,7 +15,7 @@ const CommentSchema = new Schema({
 });
 
 CommentSchema.pre("find", function(next){
-    this.populate({path:"commentedBy",select: "username avatar isPro"});
+    this.populate({ path:"commentedBy",select: "username avatar isPro"});
     next();
 })
 

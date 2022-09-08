@@ -2,21 +2,21 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const AddsSchema = new Schema({
-    name:{
-        type:String
+    name: {
+        type: String
     },
-    addLightImage:{
-        type:String
+    addLightImage: {
+        type: String
     },
-    addDarkImage:{
-        type:String
+    addDarkImage: {
+        type: String
     },
-    addLink:{
-        type:String
+    addLink: {
+        type: String
     },
-    clicks:{
-        type:Number
+    clicks: {
+        type: Number
     }
 })
 
-module.exports = mongoose.model("adds",AddsSchema);
+module.exports = mongoose.model("adds", AddsSchema);

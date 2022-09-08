@@ -21,11 +21,11 @@ const checker = async (req, res, next) =>{
        req.user = user; 
        next();
 
-      }catch(e){
-        return  res.status(500).json({error:"Unexpected error occurred!"});
+      } catch(e) {
+        return  res.status(500).json({ error: "Unexpected error occurred!" });
       }
-    }else{
-        return  res.status(400).json({error:"NO TOKEN SENT "});
+    } else {
+        return  res.status(400).json({ error: "NO TOKEN SENT " });
     }
 
 }
