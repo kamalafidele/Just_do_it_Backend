@@ -50,7 +50,7 @@ app.use(function(req, res, next) {
 });
 
 //Routes
-app.get("/", (req,res) => res.sendFile(__dirname + "/views/index.html"));
+app.get("/", (req,res) => res.sendFile(__dirname + "/views/Index.html"));
 app.use("/api/justdoit/users", userRoutes);
 app.use("/api/justdoit/workspaces", tokenChecker, workspaceRoutes);
 app.use("/api/justdoit/questions", tokenChecker, questionsRoute);
@@ -61,7 +61,7 @@ app.use("/api/justdoit/answerComments", tokenChecker, commentRoutes);
 app.use("/api/justdoit/adds", addsRoute);
 
 //NOT FOUND ERROR
-app.use((req,res) =>  res.status(404).sendFile(__dirname + "/views/index.html") );
+app.use((req,res) =>  res.status(404).sendFile(__dirname + "/views/Index.html") );
 
 //RUNNING FOR ONCE A WEEK
  var job = new cronJob('30 12 * * 4',function(){
