@@ -34,7 +34,7 @@ const logger = (req,res,next) => {
 }
 
 var corsOptions = {
-    origin: ['https://justdoit-rw.netlify.app','http://localhost:4200'],
+    origin: '*',
     optionsSuccessStatus: 200 
   }
 
