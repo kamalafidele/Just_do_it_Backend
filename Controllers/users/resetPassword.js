@@ -25,7 +25,7 @@ return res.status(400).json({error:validateResult.error.details[0].message});
     await reset.save()
     .then(async ()=> {
      await   transporter.sendMail({
-            from:`<${process.env.NET_CORE_EMAIL}>`,
+            from:`<${process.env.SMTP_EMAIL}>`,
             to:email,
             subject:"Reset your JDI Account password ",
             html:`
@@ -36,7 +36,7 @@ return res.status(400).json({error:validateResult.error.details[0].message});
                 <h2>Hello ${userExist.firstname + " " + userExist.lastname}</h2>
                 <p>You requested to reset your <strong>Mbonera</strong> password recently </p>
                 <p>Click this link to reset your password </p>
-                <p><a href="https://www.mbonera.live/shaka/reset/${reset.uniqueNumber}">Reset your password</a></p>
+                <p><a href="https://justdoit-rw.netlify.app/reset/${reset.uniqueNumber}">Reset your password</a></p>
                 <p style="padding: 10px; text-align: center; color: white; background: dodgerblue;">
                 Copyright © 2021 - Mbonera. All Rights and Policies Reserved</p>
                 </div>
@@ -83,10 +83,10 @@ const resendCode = async (req,res) =>{
                 <div>
                 <img src="https://res.cloudinary.com/find-yours/image/upload/v1634134419/Default-images/logo_u5tflg.png" 
                 style="margin-left: auto; border-radius: 4px; border: 1px solid dodgerblue;" alt="shaka">
-                <h1>Email confirmation to Mbonera account </h1>
+                <h1>Email confirmation to JDI account </h1>
                 <h2>Hello ${userExist.firstname} ${userExist.lastname}</h2>
-                <p>Thank you for registering with Mbonera. Please confirm your email </p>
-                <p> <a href="https://mbonera.live/verifyAccount/${uniqueNumber}"> Verify your Account </a> </p>
+                <p>Thank you for registering with JDI. Please confirm your email </p>
+                <p> <a href="https://justdoit-rw.netlify.app/verifyAccount/${uniqueNumber}"> Verify your Account </a> </p>
                 <p style="padding: 10px; text-align: center; color: white; background: dodgerblue;">
                 Copyright © 2021 - Mbonera. All Rights and Policies Reserved</p>
                 </div>

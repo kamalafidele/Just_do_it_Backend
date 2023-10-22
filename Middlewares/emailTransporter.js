@@ -1,16 +1,15 @@
 const nodeMailer = require("nodemailer");
 
 const transport = nodeMailer.createTransport({
+    service: 'Gmail',
     host: process.env.NET_CORE_SMTP,
-    port: 587,
+    port: 465,
+    secure: true,
     auth: {     
-           user: process.env.NET_CORE_USER,
-           pass: process.env.NET_CORE_PASS
+           user: process.env.SMTP_USERNAME,
+           pass: process.env.SMTP_PASSWORD
     },
-    tls: {
-        rejectUnauthorized: false
-    }
 });
 
 
-module.exports=transport;
+module.exports = transport;

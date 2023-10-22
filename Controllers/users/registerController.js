@@ -26,7 +26,7 @@ const handleRegister = async function(req, res, next) {
        return  res.status(400).json({ error: "User with that email already exists" });
 
 
-    let uniqueNumber = Math.floor(Math.random()*1022052)+"-"+Date.now();
+    let uniqueNumber = Math.floor(Math.random()*1022052) + "-" + Date.now();
 
     const user = new  UserSchema({
        username,
@@ -39,9 +39,9 @@ const handleRegister = async function(req, res, next) {
     try {
        await user.save();
        await transporter.sendMail({
-              from:`<${process.env.NET_CORE_EMAIL}>`,
-              to:email,
-              subject:"Please confirm your account ",
+              from:`<${process.env.SMTP_EMAIL}>`,
+              to: email,
+              subject: "Please confirm your account ",
               html:`
               <div>
               <img src="https://res.cloudinary.com/justdoit/image/upload/v1642443198/questionImages/images/Logo1_abbjeu.png" alt="im" style="width: 150px; height: 100px; border-radius: 5px;">
@@ -49,7 +49,7 @@ const handleRegister = async function(req, res, next) {
               <h1>Email confirmation to JustDoIt account </h1>
               <h2>Hello ${username} </h2>
               <p>Thank you for registering with JustDoIt. Please confirm your email </p>
-              <p> <a href="https://www.justdoit-rw.tech/verifyEmail/${uniqueNumber}" style="text-decoration: none; border-radius: 4px; background-color: dodgerblue; color: white; padding: 10px;"> Verify your Account </a> </p>
+              <p> <a href="https://justdoit-rw.netlify.app/${uniqueNumber}" style="text-decoration: none; border-radius: 4px; background-color: dodgerblue; color: white; padding: 10px;"> Verify your Account </a> </p>
               <p style="padding: 10px; text-align: center; color: white; background: dodgerblue;margin-top:10px;">
               Copyright © 2021 - JustDoIt. All Rights and Policies Reserved</p>
               </div>
